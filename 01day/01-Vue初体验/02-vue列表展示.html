@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in movies">{{item}}</li>
+        </ul>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    // 数据展示
+    // v-for: 可以响应式遍历数组中的数据
+
+    let app = new Vue({
+        el: '#app',
+        data: {
+            movies: ['中国机长','哪吒','喜剧之王','我和我的祖国']
+        }
+    })
+
+
+</script>
+</html>
