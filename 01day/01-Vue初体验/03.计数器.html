@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>计数：{{num}}</h2>
+        <!-- <button v-on:click="num++">+</button>
+        <button v-on:click="num--">-</button> -->
+        <button v-on:click="add">+</button>
+        <button v-on:click="sub">-</button>
+        <!-- 下面是语法糖写法 -->
+        <!-- <button @click="sub">+</button> -->
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+    /*
+        v-for: 遍历数据
+        el: 挂载元素    data: 定义数据      methods: 定义函数
+        1.语法糖： 简写
+        2.Vue中的MVVM： model  view model  model
+        3.proxy 代理
+        4.Vue声明周期----->
+
+    */
+
+    let obj = { // 定义数据
+        num: 0
+    }
+
+    let app = new Vue({
+        el: '#app', // 挂载元素
+        data: obj,
+        methods: {
+            add: function() {
+                console.log('add被执行了');
+                this.num++;
+            },
+            sub: function() {
+                console.log('sub被执行了');
+                this.num--;
+            }
+        }
+    });
+</script>
+
+</html>
