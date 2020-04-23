@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  var parent = document.createElement("div");
+  var child = document.createElement("p");
+  parent.appendChild(child);
+  var span = document.createElement("span");
+
+  child.after(span);
+
+  console.log(parent.outerHTML);
+  // "<div><p></p><span></span></div>"
+</script>
+
+</html>

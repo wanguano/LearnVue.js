@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input id="demoInput" value="hello world">
+  <button id="btn">点我复制</button>
+</body>
+<script>
+  const btn = document.querySelector('#btn');
+  btn.addEventListener('click', () => {
+    // 1.获取DOM元素
+    const input = document.querySelector('#demoInput');
+    // 2.选中内容
+    input.select();
+    // 判断是否选中内容
+    if (document.execCommand('copy')) {
+      document.execCommand('copy');
+      console.log('复制成功');
+    }
+   
+  })
+
+  let a, b = document.querySelector('button');
+  console.log(a);
+  console.log(b);
+</script>
+
+</html>
