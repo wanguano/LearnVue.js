@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h2>{{message}}</h2>
+    <h2 v-text="text">李银河</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-text: 根Mustache相似
+    const app = new Vue({
+      el: '#app',
+      data: {
+         message: '你好',
+         text: '今天天气好晴朗'
+      }
+    })
+  </script>
+</body>
+</html>
