@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h2>{{firstNmae + ' ' + lastNmae}}</h2>
+    <h2>{{firstNmae}} {{lastNmae}}</h2>
+    <h2>{{getFullNmae()}}</h2>
+    <!-- 计算属性 -->
+    <h2>{{fullNmae}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+         firstNmae: 'liu',
+         lastNmae: 'dehua'
+      },
+    // 计算属性: compute
+      computed: {
+        fullNmae: function () {
+          return this.firstNmae + ' ' + this.lastNmae;
+        }
+      },
+      methods: {
+        getFullNmae() {
+          return this.firstNmae + ' ' + this.lastNmae;
+        }
+      }
+    })
+  </script>
+</body>
+</html>

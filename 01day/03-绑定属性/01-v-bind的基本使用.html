@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h2>{{message}}</h2>
+    <a v-bind:href="url">百度</a>
+    <img v-bind:src="pic" alt="">
+    <!-- v-bind语法糖语法 -->
+    <a :href="url">百度</a>
+    <img :src="pic" alt="">
+
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    /*  
+       某些属性我们也希望来动态的绑定
+          比如： a img 
+        v-bind
+    */
+    const app = new Vue({
+      el: '#app',
+      data: {
+         message: '你好',
+         url: 'https://www.baidu.com',
+         pic: 'https://mingcloudpic.oss-cn-beijing.aliyuncs.com/img/20200424171931.jpg'
+      }
+    })
+  </script>
+</body>
+</html>

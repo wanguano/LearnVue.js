@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+<body>
+  <div id='app'>
+    <!-- 对象语法 -->
+    <!-- <h2 :style="{key(属性名): value(属性值)}">{{message}}</h2> -->
+    <!-- <h2 :style="{fontSize: fontSize +'px', backgroundColor: color}">{{message}}</h2> -->
+    <input type="text" id="inp">
+
+    <h2 :style="{fontSize: fontSize +'px', backgroundColor: color}">{{message}}</h2>
+    <h2 :style="getStyles()">{{message}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    /*
+        动态绑定 style
+        why: 因为有时候封装导航组件,需要动态的更换样式
+        对象语法
+    */
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好',
+        fontSize: 100,
+        color: 'orangered'
+      },
+      methods: {
+        getStyles: function () {
+          return { fontSize: this.fontSize + 'px', backgroundColor: this.color };
+        }
+      }
+    })
+
+
+
+    // v-bind 简写 :
+  </script>
+</body>
+
+</html>

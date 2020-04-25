@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- 1. ['active','news'] 当字符串使用 -->
+    <h2 class="title" :class="['active','news']">{{message}}</h2>
+    <!-- 2. [avtive, new] 当变量使用 -->
+    <h2 class="title" :class="[active,news]">{{message}}</h2>
+    <!-- 3. 函数返回值使用 -->
+    <h2 class="title" :class="getClasses()">{{message}}</h2>
+
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+      // v-bind数组语法：
+      // 1. ['active','news'] 当字符串使用
+      // 2. [avtive, new] 当变量使用
+    const app = new Vue({
+      el: '#app',
+      data: {
+         message: '你好',
+         active: 'aaaa',
+         news: 'bbbb'
+      },
+      methods: {
+        getClasses: function () {
+          return [this.active,this.news]
+        }
+      }
+    })
+  </script>
+</body>
+</html>
