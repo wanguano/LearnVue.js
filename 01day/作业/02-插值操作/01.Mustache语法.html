@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h2>{{firstNmae + lastName}}</h2>
+    <h2>{{firstNmae + ' ' + lastName}}</h2>
+    <h2>{{count * 2}}</h2>
+    <h2>{{flag&&message?message:"偶买噶"}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // Mustache语法: 胡子/胡须的意思  {{}}
+    // 支持变量/方法/逻辑判断/简单表达式
+    // {{}}
+    const app = new Vue({
+      el: '#app',
+      data: {
+         message: '',
+         firstNmae: 'liu',
+         lastName: 'dehua',
+         flag: true,
+         count: 10
+      }
+    })
+  </script>
+</body>
+</html>

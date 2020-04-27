@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 对象语法: {属性名: 变量值} -->
+    <h2 :style="{fontSize: fontSize,background: background}">{{message}}</h2>
+    <!-- 函数返回 -->
+    <h2 :style="getStyles()">{{message}}</h2>
+
+
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好',
+        fontSize: '50px',
+        background: 'red'
+      },
+      methods: {
+        getStyles(){
+          return {fontSize: this.fontSize,background: this.background};
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

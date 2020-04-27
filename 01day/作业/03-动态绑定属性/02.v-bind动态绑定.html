@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      background-color: red;
+    }
+
+    .line {
+      color: royalblue;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='app'>
+    <h2>{{message}}</h2>
+    <!-- 对象语法：v-bind:clsss="{类名: 布尔值}" -->
+    <h2 v-bind:class="{active: isActvie, line: isLine}">{{message}}</h2>
+    <!-- 函数返回值     -->
+    <h2 class="title" :class="getStyles()">{{message}}</h2>
+    <button v-on:click="btnClick">按钮</button>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 动态绑定类名
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好',
+        isActvie: true,
+        isLine: true,
+        active: 'active',
+      },
+      methods: {
+        getStyles() {
+          return { active: this.isActvie, line: this.isLine };
+        },
+        btnClick() {
+          this.isActvie = !this.isActvie;
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

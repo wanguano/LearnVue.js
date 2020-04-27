@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h2>{{message}}</h2>
+    <div v-html="picUrl"></div>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-html: 渲染html标签
+    const app = new Vue({
+      el: '#app',
+      data: {
+         message: '你好',
+         picUrl: "<img src='https://mingcloudpic.oss-cn-beijing.aliyuncs.com/img/20200424171931.jpg' alt=''/>"
+      }
+    })
+    
+  </script>
+</body>
+</html>

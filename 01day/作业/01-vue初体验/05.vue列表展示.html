@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=s, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <!-- v-for="item in obj" -->
+      <li v-for="item in movies">{{item}}</li>
+    </ul>
+  </div>
+</body>
+ <script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+ <script>
+   // v-for="item in obj"
+   
+   let app = new Vue({
+    el: '#app',
+    data: {
+      movies: ['大话西游','喜剧之王','中国机长','唐人街探案']
+    }
+   })
+   
+
+ </script>
+</html>

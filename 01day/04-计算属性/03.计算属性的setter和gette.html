@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <h2>{{fullName}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        firstNmae: 'li',
+        lastNmae: 'ergou'
+      },
+      computed: {
+         // fullNmae: function () {
+        //   return this.firstNmae + ' ' + this.lastNmae;
+        // },
+        // 计算属性一般没有set方法, 只读属性
+        // 本质上是：
+        fullName: {
+          set(newVal) {
+            console.log('----------调用了fullNmae的set');
+            let arr = newVal.split(' ');
+            this.firstNmae = arr[0];
+            this.lastNmae = arr[1];
+          },
+          get() {
+            console.log('----------调用了fullNmae的get');
+            return this.firstNmae + ' ' + this.lastNmae;
+          }
+        }
+      },
+    })
+
+  </script>
+</body>
+
+</html>

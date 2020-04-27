@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- 错误的做法： 这里不可以使用mustache语法     -->
+    <!-- <img src="{{url}}" alt=""> -->
+    <!-- 使用：v-bind指令 -->
+    <img v-bind:src="url" alt="">
+    <a v-bind:href="href">百度一下</a>
+    <!-- 语法糖写法 -->
+    <img :src="url" alt="">
+    <a :href="href">百度一下</a>
+
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-bind动态绑定属性
+    // v-bind基础使用: v-bind:属性名
+    // 语法糖写法： :
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+         message: '你好',
+         href: 'http://www.baidu.com',
+         url: 'https://mingcloudpic.oss-cn-beijing.aliyuncs.com/img/20200424171931.jpg'
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 1.代码不简洁,语法过于繁琐 -->
+    <!-- <h2>{{firstName}} {{lastName}}</h2> -->
+    <!-- 2.methods 当数据没发生变化也会一直调用函数 -->
+    <!-- <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2> -->
+
+    <!-- 3.methods 只有当数据发生变化时才会调用函数 -->
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    /*
+        + 
+        methods和computed区别
+          1.method里面的数据不管发生没发生变化,都会执行函数(有的时候数据没发生变化我们不希望调用函数)
+          2.而computed计算属性会进行缓存,如果数据没发生变化,函数只会被调用一次(数据发生变化才会调用函数)
+          总结:
+            methods不管数据发没发生变化都会调用函数
+            computed 只有在数据发生变化时才回调函数
+    */
+    const app = new Vue({
+      el: '#app',
+      data: {
+        firstName: '李',
+        lastName: '元芳'
+      },
+      methods: {
+        getFullName() {
+          console.log('methods中的getFullName方法');
+          return this.firstName + ' ' + this.lastName;
+        }
+      },computed: {
+        fullName: function() {
+          console.log('computed中的getFullName方法');
+          return this.firstName + ' ' + this.lastName;
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

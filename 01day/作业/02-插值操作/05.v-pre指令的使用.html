@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h2>{{message}}</h2>
+    <h2 v-pre>{{msg}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-pre: 用于原文输出
+    const app = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      }
+    })
+
+    // 懂了   30%
+    // 会用   40%
+    // 自己可以写出来           60%
+    // 能给别人讲出来什么意思   70%
+    // 简化/通俗移动传授给别人  100%
+  </script>
+</body>
+</html>

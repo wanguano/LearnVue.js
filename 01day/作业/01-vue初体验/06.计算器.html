@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>当前计数：{{num}}</h2>
+    <!-- 1.v-on:click -->
+    <!-- <button v-on:click="num++">+</button>
+    <button v-on:click="num--">-</button> -->
+    <!-- 2.v-on:click缩写: @click: -->
+    <!-- <button @click="num++">+</button>
+    <button @click="num--">-</button> -->
+    <!-- 3.@click: 函数/方法执行写法 -->
+    <button v-on:click="getAdd()">+</button>
+    <button v-on:click="getSub()">-</button>
+  </div>
+</body>
+<script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+<script>
+  // v-on:click    可以缩写: @click
+  // v-on:click="里面可以是变量或表达式"
+  let app = new Vue({
+    el: '#app',
+    data: {
+      num: 0
+    },
+    // 定义函数/方法
+    methods: {
+      getAdd() {
+        this.num++;
+      },
+      getSub() {
+        this.num--;
+      }
+    }
+  })
+</script>
+
+</html>

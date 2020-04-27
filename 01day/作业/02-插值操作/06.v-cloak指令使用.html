@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='app' v-cloak>
+    <h2>{{message}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-cloak: 斗篷的意思
+    // 在某些情况下，我们浏览器可能会直接显然出未编译的Mustache标签。
+    // Vue解析之前有一个V-cloak属性
+    // 解析之后会移除该属性
+
+    setTimeout(() => {
+      const app = new Vue({
+        el: '#app',
+        data: {
+          message: '你好'
+        }
+      })
+    }, 2000);
+  </script>
+</body>
+
+</html>

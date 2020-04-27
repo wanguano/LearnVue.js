@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h2>{{message}}</h2>
+    <h2 v-once>{{first}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-once
+    /*
+      有的时候我们的数据,只希望渲染第一次,之后就不在更新数据
+      v-once 该指令后不需要跟任何表达式
+      该指令作用: 表示数据值更新初始值
+    */
+    const app = new Vue({
+      el: '#app',
+      data: {
+         message: '你好',
+         first: '风'
+      }
+    })
+  </script>
+</body>
+</html>
