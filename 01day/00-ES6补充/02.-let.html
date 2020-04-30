@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // let: ES6新声明变量的方式
+  // 与var的不同点:
+  //    1.具备块级作用域
+  //    2.没有变量提升
+  //    3.暂时性死区
+  //    4.不允许重复声明
+  // var a = 10;
+  // var a = 20;
+  // let b = 10;
+  // let b = 20;
+  // console.log(a);
+  // console.log(b);
+
+  
+  // if (true) {
+  //   var a = 10;// 没有块级作用域
+  //   let b = 10;// 具备
+  //   console.log(b);
+  // }
+  // console.log(a);
+  // console.log(b);
+  {
+    var a = 10;
+    let b = 10;
+  }
+
+  console.log(a,b);
+
+</script>
+</html>

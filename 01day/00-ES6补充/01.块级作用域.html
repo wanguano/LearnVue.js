@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<button>按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<button>按钮5</button>
+
+<body>
+  <script>
+    // ES6中添加了let, let他是有if和for的块级作用域.
+    // 1.变量作用域： 变量在什么范围是可用的。
+    // {
+    //   var name = 'why';
+    //   console.log(name);
+    // }
+    // console.log(name);
+
+    // 2.没有块级作用域引起的问题: if的块级
+    // var func;
+    // if (true) {
+    //   var name='why';
+    //   func = function () {
+    //     console.log(name);
+    //   }
+    //   func();
+    // }
+    // name = 'kebo';
+    // func()
+    // console.log(name);
+
+
+    // var name = 'why';
+    // function abc(bbb) {
+    //   console.log(bbb);
+    // }
+    // abc(name)
+    // name= 'kebo'
+
+
+    // 3.没有块级作用域引起的问题: for的块级
+    // 为什么闭包可以解决问题: 函数是一个作用域.
+    // var btns = document.querySelectorAll('button')
+    // for (var i = 0; i < btns.length; i++) {
+    //   // 因为for是同步任务,当for遍历完已经全部注册完事件了
+    //   // var是没有作用域概念的
+    //   // 闭包可以解决
+    //   btns[i].addEventListener('click',function () {
+    //     console.log('当前的按钮' + i);
+    //   })
+    // }  
+
+    // 闭包: 每次循环创建了一个作用域
+    // 为什么闭包可以解决问题: 函数是一个作用域.
+    // var btns = document.querySelectorAll('button')
+    // for (var i = 0; i < btns.length; i++) {
+    //   (function (i) {
+    //     btns[i].addEventListener('click', function () {
+    //       console.log('当前的按钮' + i);
+    //     })
+    //   }(i))
+    // }
+
+    var btns = document.querySelectorAll('button')
+    // for (let i = 0; i < btns.length; i++) {
+    //   btns[i].addEventListener('click', function () {
+    //     console.log('当前的按钮' + i);
+    //   })
+    // }
+
+
+    
+
+  </script>
+</body>
+
+</html>
