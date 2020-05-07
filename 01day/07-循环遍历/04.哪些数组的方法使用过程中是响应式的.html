@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <ul>
+      <li v-for="item in letters">{{item}}</li>
+    </ul>
+    <button @click="btnClick">按钮</button>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        letters: ['a', 'b', 'c', 'd']
+      },
+      methods: {
+        btnClick() {
+          // 有哪些数组方法会进行响应式更新呢？
+          // 1.push()
+          // this.letters.push('eee','fff','ggg')
+
+          // 2.pop() 数组末尾删除一个元素
+          // this.letters.pop()
+
+          // 3.shift() 数组前面删除一个元素
+          // this.letters.shift()
+
+          // 4.unshift() 数组前面添加一个或多个元素
+          // this.letters.unshift('000','111')
+
+          // 5.splice()
+          // 作用: 添加元素/替换元素/删除元素
+          // 参数1: 起始/目标位置
+          // 参数2: 要删除的个数
+          // 参数3: ...  (从下标1的位置删除2个元素,并替换2个新的元素)
+          // splice(start, )
+          // this.letters.splice(1, 0, 'w')
+          
+          
+          // 6.sort() 排序
+          // this.letters.sort()
+
+          // 7.reverse() 反转
+          this.letters.reverse()
+
+
+          // 并不是所有修改数组，都会进行响应式处理的
+          // this.letters[0] = 'aaa'
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

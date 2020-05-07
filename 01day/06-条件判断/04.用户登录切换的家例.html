@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <span v-if="isUser">
+      <label for="user">用户名</label>
+      <input type="text" placeholder="用户名" id="user" key="user">
+    </span>
+    <span v-else>
+      <label for="email">邮箱</label>
+      <input type="text" placeholder="邮箱" id="email" key="email">
+    </span>
+    <button @click="isUser=!isUser">切换类型</button>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    /* 一个问题: 涉及到了Vue底层, 虚拟DOM virtual DDM
+    点击切换表单后,input的value值并没有被清空,为什么?
+    1.这是因为Vue在进行DOM渲染时, 出于性能考虑, 会尽可能服复用已经存在的元素, 而不是创建新的元素
+    2.上面的案例中, Vue内部会进行对比发现两部分都相似只会替换属性, 不会给你创建全新的元素
+    3.上面if的input不再使用, 直接作为else的input来使用 */
+    /* 解决方案
+    如果我们不希望Vue出现类似重复利用的问题, 可以给对应的input添加key
+    并且保证我们需要的key不同
+    这样vue就会创建一个全新的input元素 */
+    const app = new Vue({
+      el: '#app',
+      data: {
+         isUser: true
+      }
+    })
+  </script>
+</body>
+</html>

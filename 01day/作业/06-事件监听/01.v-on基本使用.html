@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <div>{{count}}</div>
+    <!-- <button v-on:click="count++">+</button> -->
+    <!-- <button v-on:click="count--">-</button> -->
+
+    <button :click="add">+</button>
+    <button :click="sub" >-</button>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-on 事件监听基本使用
+    // 缩写：  @
+    const app = new Vue({
+      el: '#app',
+      data: {
+         count: 0
+      },
+      methods: {
+        add() {
+          this.count++;
+        },
+        sub() {
+          this.count--;
+        }
+      },
+    })
+
+    // 事件监听: v-on
+    // 作用: 事件监听器
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <h2 v-if="isShow">a</h2>
+    <h2 v-if="isShow">a</h2>
+    <h2 v-if="isShow">a</h2>
+    <h2 v-if="isShow">a</h2>
+    <h2 v-if="isShow">a</h2>
+    {{message}}
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-if="condition"
+    // 根据条件判断进行显示和隐藏
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好',
+        isShow: true
+      }
+    })
+  </script>
+</body>
+
+</html>

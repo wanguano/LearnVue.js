@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 1. .stop :阻止事件冒泡  -->
+    <div @click="divClick">aaaa
+      <button @click.stop="btnClick">按钮</button>
+    </div>
+    <br>
+
+    <!-- 2. .prevent :阻止事件的默认行为 -->
+    <a href="http://www.baidu.com" @click.prevent="linkClick">百度一下</a>
+    <form action="baidu">
+      <input type="submit" value="提交" @click.prevent="submitBtn">
+    </form>
+<br>
+
+    <!-- 3. 键盘监听:  .键盘名="事件"  (只有按下了指定的键才会触发) -->
+    <input type="text" @keyup.enter="keyup">
+<br>
+<br>
+    <!-- 4. .once修饰符的使用 -->
+    <button @click.once="btn2Click">按钮2</button>
+<br>
+<br>
+  
+
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    /* 事件冒泡: 父元素和子元素注册了相同的事件,子元素触发了事件,也会触发父元素的事件 */
+    // v-on.修饰符的基本使用
+    // 1.阻止事件冒泡 
+    // 2.阻止默认事件行为
+    // 3.只触发一次事件
+    const app = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+        divClick() {
+          console.log('divClick');
+        },
+        btnClick() {
+          console.log('btnClick');
+        },
+        submitBtn() {
+          console.log('处理了一些逻辑再提交');
+        },
+        keyup() {
+          console.log('键盘按下');
+        },
+        btn2Click() {
+          console.log('我只会触发一次哦');
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

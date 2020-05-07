@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <ul>
+      <!-- item是: value   attr: 属性名  index: 下标 -->
+      <!-- <li v-for="(item, attr, index) in info">{{item}}--{{attr}}--{{index}}</li> -->
+
+      <!-- 1.在遍历对象过程中, 如果只是获取一个值, 那么获取到的是value -->
+      <li v-for="item in info">{{item}}</li>
+<br>
+      <!-- 2.获取key和value 格式: (value, key) -->
+      <li v-for="(item, value) in info">{{item}}--{{value}}</li>
+<br>
+      <!-- 3.获取对象的下标值 -->
+      <li v-for="(item, attr, index) in info">{{item}}-{{attr}}-{{index}}</li>
+    </ul>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+         info: {
+           name: 'ming',
+           age: 19,
+           height: 1.7
+         }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- v-on：参数问题,传入函数时候可以不带() -->
+    <!-- 1.事件调用时没有传入参数 -->
+    <button v-on:click="btn1Click">按钮1</button>
+    <button @click="btn1Click()">按钮1</button>
+
+    <!-- 2.在事件定义, 写方法时省略了小括号
+    但是方法本身是需要一个参数的,这个时候,Vue会将
+  浏览器产生的event事件对象作为参数传入到方法中 -->
+    <button @click="btn2Click">按钮2</button>
+
+    <!-- 3.方法定义时,我们需要event对对象,同时又需要其他参数 -->
+    <!-- 在调用时,需要手动获取浏览器参数event对象: $event -->
+    <!-- 如果传入的是数字类型,自动转化为Number类型 -->
+    <!-- 如果传入的是字符串,转换为字符串 -->
+    <!-- 如果传入是变量,(会默认从data对象中去寻找,找不到会报错) -->
+    <!--  -->
+    <!-- <button @click="btn3Click(123,event)">按钮3</button> -->
+    <button @click="btn3Click(123, $event)">按钮3</button>
+
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        event: '我是data对象中的event变量'
+      },
+      methods: {
+        btn1Click() {
+          console.log('btn1Click')
+        },
+        // 没有传入参数,接收形参默认是: 事件参数对象
+        btn2Click(event) {
+          console.log(event);
+        },
+        btn3Click(abc,event) {
+          console.log(abc,event);
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

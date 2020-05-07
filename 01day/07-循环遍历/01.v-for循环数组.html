@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h2 v-for="(item, index) in movie">{{index+1}}-{{item}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-for 遍历数组
+    const app = new Vue({
+      el: '#app',
+      data: {
+         movie: ['钢铁侠','金刚狼','烈日灼心','复联4']
+      }
+    })
+  </script>
+</body>
+</html>

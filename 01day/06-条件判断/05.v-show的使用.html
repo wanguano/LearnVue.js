@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- v-if: 当条件为false时, 包含v-if指令的元素,根本不会存在DOM中 -->
+    <h2 v-if="isShow" id="aaa">{{message}}</h2>
+
+    <!-- v-show: 当条件为false时, v-show只是给我们元素添加了一个行内样式: display: none -->
+    <h2 v-show="isShow" id="bbb">{{message}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    /* v-show 和 v-if 类似
+    都是显示和隐藏 
+    区别：v-if 会把元素进行删除
+          v-show 会把元素进行隐藏 display: none */
+    const app = new Vue({
+      el: '#app',
+      data: {
+         message: '你好',
+         isShow: true
+      }
+    })
+
+    // [object Object]
+    // console.log({}.toString());
+  </script>
+</body>
+</html>

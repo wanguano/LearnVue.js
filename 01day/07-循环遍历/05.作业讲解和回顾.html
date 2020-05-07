@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id='app'>
+    <ul>
+      <li v-for="(item, index) in movies" :class="{active: currentIndex===index}" @click="btnClick(index)">{{item}}</li>
+    </ul>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    /* 展示数组
+    1. 将点击项的索引赋值到标识变量
+    2. 判断当前标识和当前项的索引是否相等
+    判断点击项的索引是否相等标识索引 */
+    const app = new Vue({
+      el: '#app',
+      data: {
+        movies: ['海王','海尔兄弟','海贼王','大话西游'],
+        currentIndex: 0
+      },
+      methods: {
+        btnClick(index) {
+          this.currentIndex = index;
+          console.log(this.currentIndex);
+        }
+      },
+    })
+  </script>
+</body>
+</html>
