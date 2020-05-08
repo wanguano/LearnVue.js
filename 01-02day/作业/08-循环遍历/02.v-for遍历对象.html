@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <ul>
+      <!--  -->
+      <li v-for="(value, attr, index) in info">{{value}}---{{attr}}---{{index}}</li>
+    </ul>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        info: {
+          name: '万馆',
+          age: 19,
+          gender: '男'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

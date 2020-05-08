@@ -18,30 +18,20 @@
   -->
   <div id='app'>
     <ul>
-      <li :class="{active: isActive}" @click="btnClick(movies,index)" v-for="(item,index) in movies">{{index}}-{{item}}</li>
+      <li v-for="(item, index) in movies" :class="{active: isActive === index}" @click="click(index)">{{item}}</li>
     </ul>
   </div>
   <script src='../js/vue.js'></script>
   <script>
-    /*
-      1.获取元素与
-      2.注册事件
-      3.点击当前元素应用类样式,移除其余兄弟元素类样式
-
-      点击事件里面可以带参数进行传递
-    */
     const app = new Vue({
       el: '#app',
       data: {
         movies: ['海尔兄弟', '大话西游', '误杀', '少年的你'],
-        isActive: false
+        isActive: 0
       },
       methods: {
-        btnClick: function (item, index) {
-          for (let i = 0; i < this.movies.length; i++) {
-            document.querySelectorAll('li')[i].classList.remove('active');
-          }
-          document.querySelectorAll('li')[index].classList.toggle('active')
+        click(index) {
+          this.isActive = index;
         }
       }
     })

@@ -21,19 +21,20 @@
       </thead>
       <tbody>
         <tr v-for="(item, index) in books">
-          <td>{{index}}</td>
+          <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.date}}</td>
-          <td>{{item.price}}</td>
+          <td>{{item.price | showPrice}}</td>
           <td>
-            <button>-</button>
+            <button @click="decrement(index)" :disabled="item.count <= 1">-</button>
             {{item.count}}
-            <button>+</button>
+            <button @click="increment(index)">+</button>
           </td>
-          <td><button>移除</button></td>
+          <td><button @click="remove(index)">移除</button></td>
         </tr>
       </tbody>
     </table>
+    <h2>总价: {{getTotalPrice}}</h2>
   </div>
 </body>
 <script src="../js/vue.js"></script>

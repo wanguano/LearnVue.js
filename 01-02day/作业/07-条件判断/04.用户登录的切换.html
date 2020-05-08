@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <span v-if="isUser">
+      用户名<input type="text" id="user" key='user'>
+    </span>
+    <span v-else>
+      密码<input type="text" id="pwd" key='pwd'>
+    </span>
+    <button @click="isUser=!isUser">切换类型</button>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    /* 一个问题, 当切换表单时, 里面的value还存在是为什么🤔
+    这涉及到了Vue底层问题, 虚拟DOM virtual DOM
+    原因: 因为DOM渲染时, 出于性能考虑, 会尽可能复用已存在的元素,而不是创建新的元素
+    解决方案:
+      1.如果不希望出现重复利用的问题,可以给对应的 元素添加key
+      2.并且保证 key 的不同 */
+    const app = new Vue({
+      el: '#app',
+      data: {
+         message: '你好',
+         isUser: true
+      }
+    })
+  </script>
+</body>
+</html>

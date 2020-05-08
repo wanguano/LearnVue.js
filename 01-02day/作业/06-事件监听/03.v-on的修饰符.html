@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- v-on访问修饰符 -->
+    <!-- 1 .stop 阻止事件冒泡 -->
+    <div @click="divClick">
+      <button @click.stop="btnClick">按钮</button>
+    </div>
+<br>
+    <!-- 2 .prevent 阻止事件的默认行为 -->
+    <a @click.prevent="btnClick" href="http://yanxuan.nosdn.127.net/54834f9fd4841b6ddc3117a16095a3f1.png">gitee</a>
+<br>
+<br>
+    <!-- 3 .once 只触发一次事件 -->
+    <button @click.once="btnClick">按钮2</button>
+<br>  
+<br>  
+    <!-- 4  {keyCode | keyAlias} -->
+    <input @keyup.Enter="keyUp" type="text">
+
+
+  </div>
+
+<!-- 掘金 -->
+<img src="https://user-gold-cdn.xitu.io/2020/5/7/171ef277b842de73?w=1685&h=1574&f=png&s=41283" alt="">
+
+<!-- 搜狗 -->
+<img src="https://img02.sogoucdn.com/app/a/100520146/e2fecc967deab64f00218dc30dce2002" alt="IMG_20180909_143543.jpg" title="IMG_20180909_143543.jpg" />
+
+<!-- 网易  👌可以-->
+<img src="http://yanxuan.nosdn.127.net/54834f9fd4841b6ddc3117a16095a3f1.png" alt="icon.png" title="icon.png" />
+
+<!-- imgchr  -->
+<img src="https://s1.ax1x.com/2020/05/07/Ymn0sS.png" alt="Ymn0sS.png" title="Ymn0sS.png" />
+<br>
+<br>
+<!-- picGo -->
+<!-- github -->
+<img src="https://cdn.jsdelivr.net/gh/wanguano/cloudPic//img20200507205948.png"/>
+
+<!-- 阿里云 -->
+<img src="https://mingcloudpic.oss-cn-beijing.aliyuncs.com/img/20200507205551.png"/>
+
+<!-- gitee -->
+<img src="https://gitee.com/xmkm/cloudPic/raw/master/img/20200507210323.png"/>
+
+  <script src='../js/vue.js'></script>
+  <script>
+    // 当父元素和子元素注册了相同的事件,子元素触发了会冒泡的父级元素接着触发
+    const app = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      },
+      methods: {
+        btnClick() {
+          console.log('btnClick');
+        },
+        divClick() {
+          console.log('divClick');
+        },
+        keyUp() {
+          console.log('ok');
+        }
+      },
+    })
+  </script>
+</body>
+</html>

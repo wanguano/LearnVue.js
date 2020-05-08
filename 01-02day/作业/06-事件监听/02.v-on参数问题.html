@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- 1.事件调用的方法没有参数 -->
+    <button @click="btn1click()">按钮1</button>
+    <button @click="btn1click">按钮1</button>
+
+    <!-- 2.在时间定义时, 写方法时省略了小括号, 但方法本省需要一个参数,
+    Vue会默认将浏览器生产的even事件作为参数传入到方法 -->
+    <button @click="btn2Click">按钮2</button>
+
+    <!-- 3.方法定义时, 需要用到event对象, 同时有需要其他参数 -->
+      <!-- 调用时, 传入 $event 即可获取事件对象 -->
+      <button @click="btn3Click('abc', $event)">按钮3</button>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 调用时没有传入参数, 有一个默认参数: 事件参数对象
+    const app = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      },
+      methods: {
+        btn1click() {
+          console.log('btn1Click')
+        },
+        btn2Click(even) {
+          console.log(even);
+        },
+        btn3Click(abc, event) {
+          console.log('++++++++',abc,event);
+        }
+      },
+    })
+  </script>
+</body>
+</html>
