@@ -29,7 +29,7 @@ let arr = [
 // console.log(total);
 
 //  2.reduce()
-var total = [4,5,6].reduce((init,current) => {
-  return init + current;
+var total = [4,5,6].reduce((preValue,item) => {
+  return preValue + item;
 },0)
 console.log(total);

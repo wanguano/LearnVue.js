@@ -65,6 +65,9 @@ const app = new Vue({
       //   total += item.price * item.count
       // }
       // return total
+
+      
+    }
   },
   filters: {
     showPrice(price) {
