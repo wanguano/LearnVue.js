@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 不加绑定属性,默认显示的是字符串 -->
+    <!-- <cpn cmessage="message"></cpn> -->
+    <!-- 使用绑定属性,将父组件中的数据,传递给子组件属性 -->
+    <cpn v-bind:cmovies="movies"  :cmessage="message"></cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>{{cmessage}}</h2>
+      <h2>{{age}}</h2>
+      <ul>
+        <li v-for="(item, index) in cmovies">{{item}}</li>
+      </ul>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 父组件如何向子组件传递数据?
+    // 1.在子组件定义 props 属性, 值可以是数组|对象
+    // 2.在使用子组件时,用v-bind绑定属性: v-bind:cmovies=movies
+
+    // 父传子: props
+    const cpn = {
+      template: '#cpn',
+      data() { return {} },
+      // props: ['cmovies', 'cmessage']
+      props: {
+        // 1.可以类型限制
+        // cmovies: Array,
+        // cmessage: String
+
+        // 2.提供默认值,以及必传值
+        cmessage: {
+          type: String,
+          default: 'aaa',
+          required: true
+        },
+        // 类型是对象或者数组时, 默认值必须是一个函数
+        cmovies: {
+          type: Array,
+          default() {
+            return ['a','b']
+          }
+        },
+        // 自定义验证函数
+        age: {
+          type: Number,
+          default: 0,
+          validator: function (value) {
+            return value>=0;
+          }
+        }
+      }
+    }
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        movies: ['海王', '海贼王', '海棉宝宝', '海尔兄弟'],
+        message: 'hello world'
+      },
+      components: {
+        cpn
+      }
+    })
+
+
+
+    /* 
+        // 子组件
+        const cpn = {
+          template: '#cpn',
+          data() { return {} },
+          props: ['cmovies']
+        }
+
+        // 父组件
+        const app = new Vue({
+          el: '#app',
+          data: {
+            message: '你好',
+            movies: ['海贼王','海尔兄弟','海王']
+          },
+          components: {
+            cpn
+          }
+        }) */
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <span>名：</span>
+      <span>
+        <input type="text" v-model='firstName'>
+      </span>
+    </div>
+    <div>
+      <span>姓：</span>
+      <span>
+        <input type="text" v-model='lastName'>
+      </span>
+    </div>
+    <div>{{fullName}}</div>
+  </div>
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript">
+    /*
+      侦听器
+        侦听器与计算属性类似
+        都是在数据发生改变时, 才会执行函数
+        注意: 监听的属性,和定义的函数名要相同
+    */
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        firstName: 'Jim',
+        lastName: 'Green',
+        // fullName: 'Jim Green'
+      },
+      computed: {
+        fullName() {
+          return this.firstName + ' ' + this.lastName;
+        }
+      },
+      watch: {
+        // firstName(val) {
+        //   this.fullName = val + ' ' + this.lastName;
+        // },
+        // lastName(val) {
+        //   this.fullName = this.firstName + ' ' + val;
+        // }
+      },
+
+    });
+  </script>
+</body>
+
+</html>

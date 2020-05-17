@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <ul>
+      <li v-for="item in list">{{item}}</li>
+    </ul>
+    <div>
+      <div>{{info.name}}</div>
+      <div>{{info.age}}</div>
+      <div>{{info.gender}}</div>
+    </div>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 数组响应式和对象响应式
+    // 1、变异方法：会影响数组的原始数据的变化。
+    // 2、替换数组：不会影响原始的数组数据，而是形成一个新的数组。
+    const app = new Vue({
+      el: '#app',
+      data: {
+        list: ['西瓜', '榴莲', '香蕉', '苹果'],
+        info: {
+          name: '万馆',
+          age: 18
+        }
+      }
+    })
+    // 通过下标方式修改原数组:不会响应式更新
+    // app.list[0] = '葡萄'
+    // 通过添加属性: 不会响应式更新
+    // app.info.gender = '男';
+
+    // Vue.set(要响应式更新的数组/对象,'索引/属性名','新的值')
+    // Vue.set(app.list,0,'葡萄')
+    // app.$set(app.list,1,'葡萄')
+
+    Vue.set(app.info, 'gender', '男')
+  </script>
+</body>
+
+</html>

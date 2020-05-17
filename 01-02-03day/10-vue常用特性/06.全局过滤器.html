@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <input type="text" v-model="message">
+    <div>{{message | upper}}</div>
+    <div>{{message | upper | lower}}</div>
+    <div :class="message | upper">过滤class属性</div>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 全局过滤器
+    Vue.filter('upper', (val) => {
+      return val.charAt(0).toUpperCase() + val.slice(1);
+    })
+    Vue.filter('lower', (val) => {
+      return val.charAt(0).toLowerCase() + val.slice(1);
+    })
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: ''
+      }
+    })
+  </script>
+</body>
+
+</html>

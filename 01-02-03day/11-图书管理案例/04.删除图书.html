@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    .grid {
+      margin: auto;
+      width: 530px;
+      text-align: center;
+    }
+
+    .grid table {
+      border-top: 1px solid #C2D89A;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .grid th,
+    td {
+      padding: 10;
+      border: 1px dashed #F3DCAB;
+      height: 35px;
+      line-height: 35px;
+    }
+
+    .grid th {
+      background-color: #F3DCAB;
+    }
+
+    .grid .book {
+      padding-bottom: 10px;
+      padding-top: 5px;
+      background-color: #F3DCAB;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="grid">
+      <div>
+        <h1>图书管理</h1>
+        <div class="book">
+          <div>
+            <label for="id">
+              编号：
+            </label>
+            <input type="text" id="id" v-model="id" :disabled="flag">
+            <label for="name">
+              名称：
+            </label>
+            <input type="text" id="name" v-model="name">
+            <button @click="submit">提交</button>
+          </div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr :key='item.id' v-for='(item, index) in books'>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.date}}</td>
+            <td>
+              <a href="" @click.prevent @click="change(item.id)">修改</a>
+              <span>|</span>
+              <a href="" @click.prevent @click="remove(item.id)">删除</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript">
+    /*
+      图书管理-添加图书
+    */
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        flag: false,
+        name: '',
+        id: '',
+        books: [{
+          id: 1,
+          name: '三国演义',
+          date: ''
+        }, {
+          id: 2,
+          name: '水浒传',
+          date: ''
+        }, {
+          id: 3,
+          name: '红楼梦',
+          date: ''
+        }, {
+          id: 4,
+          name: '西游记',
+          date: ''
+        }]
+      },
+      methods: {
+        // 修改
+        change(index) {
+          //  this.id = this.books[index].id
+          //  this.name = this.books[index].name
+
+          this.flag = !this.flag;
+          let book = this.books.filter(item => item.id === index)
+          this.id = book[0].id
+          this.name = book[0].name
+
+        },
+        // 提交
+        submit() {
+
+
+          // 添加
+          if (!this.flag) {
+            this.books.push({
+              name: this.name,
+              id: this.id,
+              date: ''
+            });
+            // 清空表单
+            this.name = '';
+            this.id = '';
+          } else {
+            this.flag = !this.flag;
+            // 替换 some方法
+            this.books.some(item => {
+              if (item.id === this.id) {
+                item.name = this.name;
+                return true; // 终止循环
+              }
+            })
+          }
+          this.name = ''
+          this.id = ''
+        },
+        // 删除
+        remove(id) {
+
+          // let removeIndex =  this.books.findIndex(item => item.id === id)
+          // this.books.splice(removeIndex,1)
+
+          // -------另一种方法(返回非删除的元素数组, 重新赋值给books)
+          this.books = this.books.filter(item => item.id!=id);
+
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

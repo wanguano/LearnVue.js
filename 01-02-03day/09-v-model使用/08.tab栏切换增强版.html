@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav li.active a {
+      color: #198df8;
+      background: #fff;
+      border: none;
+    }
+
+    .fade.active {
+      opacity: 1;
+    }
+
+    .vertical-tab {
+      width: 920px;
+      margin: 100px auto;
+    }
+
+    .vertical-tab .nav {
+      list-style: none;
+      width: 200px;
+    }
+
+    .vertical-tab .nav-tabs1 {
+      border-right: 3px solid #e7e7e7;
+    }
+
+    .vertical-tab .nav-tabs2 {
+      border-left: 3px solid #e7e7e7;
+    }
+
+    .vertical-tab .nav a {
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      margin: 0 0 1px 0;
+      text-decoration: none;
+    }
+
+    .vertical-tab .tab-content {
+      color: #555;
+      background-color: #fff;
+      font-size: 15px;
+      letter-spacing: 1px;
+      line-height: 23px;
+      padding: 10px 15px 10px 25px;
+      display: table-cell;
+      position: relative;
+    }
+
+    .vertical-tab .nav-tabs1 {
+      float: left;
+    }
+
+    .vertical-tab .tabs {
+      width: 500px;
+      box-sizing: border-box;
+      float: left;
+    }
+
+    .vertical-tab .tab-content h3 {
+      font-weight: 600;
+      text-transform: uppercase;
+      margin: 0 0 5px 0;
+    }
+
+    .vertical-tab .nav-tabs2 {
+      float: right;
+    }
+
+    .tab-content .tab-pane {
+      display: none;
+    }
+
+    .tab-content .tab-pane.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" class="vertical-tab">
+    <!-- 左侧tab栏 -->
+    <ul class="nav nav-tabs1">
+      <li :class="{active: isActive==index}" @click="btnClick(index)" v-for="(item ,index) in list" v-if="index<3"><a href="#">{{item.title}}</a></li>
+    </ul>
+    <!-- 内容区域 -->
+    <div class="tab-content tabs">
+      <div v-for="(item, index) in list" class="tab-pane fade" :class="{active: isActive==index},">
+        <h3>{{item.title}}</h3>
+        <p>{{item.content}}</p>
+      </div>
+
+    </div>
+    <ul class="nav nav-tabs2">
+      <!-- 右侧tab栏 -->
+      <li :class="{active: isActive==index}" @click="btnClick(index)" v-for="(item, index) in list" v-if="index>=3"><a href="#">{{item.title}} </a></li>
+    </ul>
+  </div>
+</body>
+<script src='../js/vue.js'></script>
+<script>
+  /* 通过绑定class 判断点击项index来控制列表项的 显示或隐藏 */
+  // 在绑定class 判断定于的变量与当前项的index是否相等
+  const app = new Vue({
+    el: '#app',
+    data: {
+      isActive: 0,
+      list: [{
+        id: 1,
+        title: 'Section 1',
+        content: 'content1'
+      }, {
+        id: 2,
+        title: 'Section 2',
+        content: 'content2'
+      }, {
+        id: 3,
+        title: 'Section 3',
+        content: 'content3'
+      }, {
+        id: 4,
+        title: 'Section 4',
+        content: 'content4'
+      }, {
+        id: 5,
+        title: 'Section 5',
+        content: 'content5'
+      }, {
+        id: 6,
+        title: 'Section 6',
+        content: 'content6'
+      }]
+    },
+    methods: {
+      btnClick(index) {
+        this.isActive = index;
+      }
+    },
+  })
+</script>
+
+</html>

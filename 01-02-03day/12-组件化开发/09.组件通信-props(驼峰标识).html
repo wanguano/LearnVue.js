@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- 以: - 来代替大写 -->
+    <cpn v-bind:c-info="info"></cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>我是标题</h2>
+      <p>我是段落,哈哈哈</p>
+      <p>我是内容,呵呵呵</p>
+      <h2>{{cInfo}}</h2>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 当props接收父组件传递数据的属性是驼峰标识时: 使用组件接收父组件传递的值用 - 代替大写
+    const cpn = {
+      template: '#cpn',
+      props: {
+        cInfo: {
+          type: Object,
+          default() {
+            return {}
+          }
+        }
+      }
+    }
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+         info: {
+           name: 'why',
+           age: 19,
+           height: 1.8
+         }
+      },
+      components: {
+        cpn
+      }
+    })
+  </script>
+</body>
+</html>

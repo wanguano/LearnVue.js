@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <label for="uname">
+      <input type="text" v-model.lazy="uname"><span>{{tip}}</span>
+    </label>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+      /*      
+      侦听器
+      1、采用侦听器监听用户名的变化
+      2、调用后台接口进行验证
+      3、根据验证的结果调整提示信息
+    */
+    const app = new Vue({
+      el: '#app',
+      data: {
+        uname: '',
+        tip: ''
+      },
+      methods: {
+        // 验证用户名是否存在
+        checkName(uname) {
+          var that = this;
+          // 发生请求
+          senAjax({
+            url: 'http://localhost:3000/checkName',
+            method: 'get',
+            data: { name: uname },
+            success(result) {
+              console.log(this);
+              that.tip = result;
+            }
+          })
+        }
+      },
+      watch: {
+        uname(val) {
+          this.tip = '正在发生请求';
+          this.checkName(val);
+        }
+      },
+    })
+
+
+
+
+    function senAjax(options) {
+      let { url, data, method, success, error } = options;
+      var xhr = new XMLHttpRequest;
+      // method的默认值
+      method = method ? method : 'get';
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) return;
+        if (xhr.status >= 200 && xhr.status < 300) {
+          if (success) success(xhr.response)
+        } else {
+          if (error) error('当前您的网络状态不佳')
+        }
+      }
+
+      // 整理参数
+      let str = '';
+      for (let key in data) {
+        str += `${key}=${data[key]}&`;
+      }
+      // 判断是否以&符结尾,返回布尔值,截取到最后的&符  
+      str = str.endsWith('&') ? str.substr(0, str.lastIndexOf('&')) : str;
+
+      // 根据请求方式,决定如何携带参数
+      if (method.toUpperCase() === 'GET') {
+        xhr.open(method, url + '?' + str);
+        xhr.send();
+      } else {
+        xhr.open(method, url);
+        // 设置请求头,post请求必须要设置content-type,标记请求体内容的解析方式,不然后端无法解析获取数据
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(str);
+      }
+    }
+  </script>
+</body>
+
+</html>

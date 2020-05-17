@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 实例了三个组件 -->
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>计数:{{counter}}</h2>
+      <button @click="decrement">-</button>
+      <button @click="increment">+</button>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // Vue组件中的data为什么是函数?
+    /* 
+      如果组件中的data是对象会发生什么问题?
+        1.多个组件会共用一个引用地址对象的数据
+        2.数据发生改变后,会互相影响
+      组件中的data如果是返回的新的对象引用地址的话
+        1.组件之间的数据是相互独立存在的
+        2.数据改变之后,不会相相互影响
+     */
+    // const a = {
+    //   counter: 1
+    // }
+
+    Vue.component('cpn', {
+      template: '#cpn',
+      data() {
+        return {
+          counter: 0
+        }
+      },
+      methods: {
+        increment() {
+          this.counter++;
+        },
+        decrement() {
+          this.counter--;
+        }
+      },
+    })
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      }
+    })
+  </script>
+  <script>
+    /* 
+      1.函数内返回的每个对象是都新的引用地址
+      2.而返回一个引用地址的对象, 指向的都是相同的
+     */
+
+    // p---->0x001
+    // const p = {
+    //   name: '万馆',
+    //   age: 18
+    // }
+
+    // function abc() {
+    //   return p
+    // }
+
+    // var p1 = abc();
+    // p1.name = 'wansi';
+    // var p2 = abc();
+    // var p3 = abc();
+
+    // console.log(p2);
+    // console.log(p3);
+  </script>
+</body>
+
+</html>

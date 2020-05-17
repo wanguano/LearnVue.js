@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 监听事件, 这里的大写会自动转换成小写 -->
+    <cpn @item-Click="cpnClick"></cpn>
+  </div>
+
+
+  <template id="cpn">
+    <div>
+      <button v-for="item in categories" @click="btnClick(item)">{{item.name}}</button>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 在开发过程中, 有时需要子组件将数据传递给父组件
+    // 然后父组件根据数据来进行网络请求
+
+    // 需求: 子组件向父组件传值
+    // 1.发射事件
+    // 2.在使用组件时定义事件
+
+    /* 1.在子组件中点击触发获得到的值,发射/触发事件事件
+       2.在使用组件时,监听定义的事件,并在父组件中定义接收
+       3.在父组件中方法接收数据
+     */
+    const cpn = {
+      template: '#cpn',
+      data() {
+        return {
+          categories: [
+            { id: 'aaa', name: '热门推荐' },
+            { id: 'bbb', name: '手机数码' },
+            { id: 'ccc', name: '家用家电' },
+            { id: 'ddd', name: '电脑办公' },
+          ]
+        }
+      },
+      methods: {
+        btnClick(item) {
+          // console.log(item);
+          // 发射事件
+          this.$emit('item-click', item)
+        }
+      },
+    }
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      },
+      components: {
+        cpn
+      },
+      methods: {
+        cpnClick(item) {
+          console.log(item);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

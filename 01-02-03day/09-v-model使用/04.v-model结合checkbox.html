@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 1.checkbox单选框,对应的是boolean值 -->
+    <label for="agree">
+      <input type="checkbox" id="agree" v-model="isAgree">同意协议
+      <h2>您的选择是: {{isAgree}}</h2>
+    </label>
+    <!-- 2.chenck复选框,对应的是数组 -->
+    <input type="checkbox" value="足球" v-model="hobbies" id="">足球
+    <input type="checkbox" value="篮球" v-model="hobbies" id="">篮球
+    <input type="checkbox" value="羽毛球" v-model="hobbies" id="">羽毛球
+    <input type="checkbox" value="乒乓球" v-model="hobbies" id="">乒乓球
+    <h2>您的爱好是: {{hobbies}}</h2>
+    <!-- 对比, 上面的value都是写死的,下面的value是动态获取的 -->
+    <label :for="item" v-for="(item, index) in originHobbies">
+      <input type="checkbox" :id="item" :value="item" v-model="hobbies">{{item}}
+    </label>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-mode和checkbox的双向绑定
+    const app = new Vue({
+      el: '#app',
+      data: {
+        isAgree: false, // 单选框
+        hobbies: [], // 多选框
+        originHobbies: ['篮球','羽毛球','足球','高尔夫球','排球']
+      }
+    })
+  </script>
+</body>
+
+</html>

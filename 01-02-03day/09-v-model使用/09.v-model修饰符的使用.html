@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 1. .lazy 当表单失去焦点或按钮回车时,才更新数据 -->
+    <input type="text" v-model.lazy="message">
+    <h2>{{message}}</h2>
+    <!-- 2. .number 更新model时,值数据类型是number  -->
+    <input type="number" v-model.number="number">
+    <h2>{{typeof(number)}}--{{number}}</h2>
+    <!-- 3. .trim 更新model时,将表单中两侧空格去除 -->
+    <input type="text" v-model.trim="name">
+    <h2>{{name}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-model的修饰符
+    // .lazy
+    //  v-model绑定的数据是实时更新的,有的时候我们希望,在用户的表单失去焦点或按下回车时,才更新数据
+    //  这个时候使用 .lazy修饰符
+    // .number
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好',
+        number: 0,
+        name: 'code'
+      }
+    })
+  </script>
+</body>
+
+</html>

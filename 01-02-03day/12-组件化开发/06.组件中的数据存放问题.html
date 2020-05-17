@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>{{title}}</h2>
+      <div>It's title</div>
+      <div>I in learn</div>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 组件中如果使用数据
+    // 1.访问Vue实例中的data可以使用吗? 组件不能访问Vue实例中的数据
+    // 2.在自定义组件中定义的data数据, 必须是一个"函数"
+    Vue.component('cpn', {
+      template: '#cpn',
+      data() {
+        return {
+          title: '我是组件中的标题'
+        }
+      }
+    })
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好',
+        title: '我是标题'
+      }
+    })
+  </script>
+</body>
+
+</html>

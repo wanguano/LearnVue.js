@@ -7,23 +7,35 @@
 </head>
 <body>
   <div id='app'>
-    <input type="text" >
+    <!-- v-model -->
+    <!-- <input type="text" v-model="message"> -->
+    <!-- <input type="text" :value="message" @input="changeValue"> -->
+    <input type="text" :value="message" @input="message = $event.target.value">
+    <h2>{{message}}</h2>
   </div>
   <script src='../js/vue.js'></script>
   <script>
     /* 
       双向数据绑定基本原理
-        1.什么是单项绑定?
-          ?
+        1.什么是单项绑定? 
+          从model中数据渲染到view中就是数据的单项绑定
         2.用其他方式实现双向绑定
+          v-bind 绑定vlaue
+          @="input" 监听事件,改变model中的数据
         3.由哪两个操作实现?
-          ?
+          v-bind
+          监听事件
     */
     const app = new Vue({
       el: '#app',
       data: {
          message: '你好'
-      }
+      },
+      methods: {
+        changeValue(even) {
+          this.message = even.target.value;
+        }
+      },
     })
   </script>
 </body>

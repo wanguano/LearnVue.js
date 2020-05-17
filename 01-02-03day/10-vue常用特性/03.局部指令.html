@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 1.让表单自动获取焦点 -->
+    <input type="text" v-focus>
+    <!-- 2.让表单更换背景色 -->
+    <input type="text" v-color="color">
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 局部自定义指令(有限制, 只能在当前组件/实例中使用)
+    // Vue实例中定义
+    const app = new Vue({
+      el: '#app',
+      data: {
+        color: 'lime',
+        message: '你好'
+      },
+      directives: {
+        focus: {
+          // 指令的定义
+          inserted: (el) => {
+            el.focus();
+          }
+        },
+        color: {
+          inserted: (el, binding) => {
+            console.log(binding);
+            el.style.backgroundColor = binding.value;
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

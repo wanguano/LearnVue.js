@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <h2>{{message}}</h2>
+    <button @click="update">更新</button>
+    <button @click="destroy">销毁</button>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '生命周期'
+      },
+      // 挂载el时触发的四个钩子函数
+      beforeCreate() {
+        console.log('beforeCreate');
+      },
+      created() {
+        console.log('created');
+      },
+      beforeMount() {
+        console.log('beforeMount');
+      },
+      mounted() {
+        console.log('mounted');
+      },
+      // 数据更新时触发
+      beforeUpdate: function(){
+        console.log('beforeUpdate');
+      },
+      updated: function(){
+        console.log('updated');
+      },
+      // Vue实例销毁时触发
+      beforeDestroy: function(){
+        console.log('beforeDestroy');
+      },
+      destroyed: function(){
+        console.log('destroyed');
+      },
+      methods: {
+        update() {
+          this.message = 'hello'
+        },
+        destroy() {
+          this.$destroy();
+        }
+      },
+
+
+    })
+  </script>
+</body>
+
+</html>
