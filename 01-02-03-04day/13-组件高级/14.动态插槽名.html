@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <current-user>
+      <!-- 动态指令参数也可以用在 v-slot 上, 来定义动态的插槽名 -->
+      <template v-slot:[dynamicSlotName]>
+          
+      </template>
+     </current-user>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <span>
+        <!-- 为了让 user 在父级插槽中可用, 我们将 user 作为 <slot> 元素的一个属性绑定 -->
+        <slot :user="user">{{user.lastName}}</slot>
+      </span>
+    </div>
+    
+  </template>
+
+  <script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好',
+      },
+      components: {
+        currentUser: {
+          template: '#cpn',
+          data() {
+            return {
+              user: {
+                lastName: '亦凡',
+                firstName: '吴'
+              }
+            }
+          },
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

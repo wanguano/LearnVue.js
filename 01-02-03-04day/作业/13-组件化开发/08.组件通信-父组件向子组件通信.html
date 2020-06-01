@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- 不加绑定属性,默认显示的是字符串 -->
+    <!-- <cpn c-message="我是普通的字符串, 传递的(没有使用绑定属性"></cpn> -->
+    <!-- 使用绑定属性, 将值传递给子组件 -->
+    <cpn :cmessage="message"></cpn>
+
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>hello jack</h2>
+      <h2>{{cmessage}}</h2>
+      <h2>{{cmovies}}</h2>
+      <!-- <h2>{{message}}</h2> -->
+      <h2>{{age}}</h2>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 组件间通信: 父组件向子组件传值
+    // 父组件向子组件通信步骤:
+    // 1.在子组件中定义 props 值可以是数组 | 对象
+    // 2.在使用子组件中使用 v-bind 绑定属性 将定义的属性从父组件中传递进入
+    // 注意事项: 使用驼峰命名法, 在使用时 大写换成小写 前面加一个横线( - )
+
+    // 父传子
+    Vue.component('cpn',{
+      template: '#cpn',
+      // props: ['cMessage'],
+      props: {
+        // 1.可以限制父组件传递值的类型
+        // cmessage: String,
+
+        // 2.可以提供默认值, 以及必传项
+          cmessage: {
+            type: String,
+            required: true,
+            default: '我是porps定义的默认值'
+          },
+
+          // 3. 当传递的是一个对象或数组是, 默认值必须是一个函数
+          cmovies: {
+            type: Array,
+            default() {
+              return ['1','2','3']
+            }
+          },
+
+          age: {
+            type: Number,
+            default: 0,
+            validator: (value) => value>=0
+          }
+      }
+    })
+
+    
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      }
+    })
+  </script>
+</body>
+</html>

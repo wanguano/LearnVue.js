@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <li v-for="item in list">{{item}}</li>
+    <br>
+      <li>{{info.name}}</li>
+      <li>{{info.age}}</li>
+      <li>{{info.gender}}</li>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 1.变异方法会直接修改原数组
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         list: ['乒乓球','足球','排球','羽毛球'],
+        info: {
+           name: '张三',
+          age: 18
+        }
+      }
+    })
+    Vue.set(vm.info,'gender','男')
+
+
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn></cpn>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 什么是组件?
+    // 组件系统让我们可以用独立可复用的小组件来构建大型应用，几乎任意类型的应用的界面都可以抽象为一个组件树
+    // 没有被挂载/管理的范围使用不了组件
+    // 全局组件注册分三步:
+    // 1.创建组件构造器 extend({ })
+    // 2.注册组件 component(tagName, cpnConstructor);
+    // 3.使用组件
+
+    let cpnConstructor = Vue.extend({
+      template: `
+       <div>
+        <h2>我是标题</h2>
+        <div>我是内容, 哈哈哈</div>
+        <div>我是内容, 呵呵呵</div>
+       </div>
+      `
+    })
+    
+    Vue.component('cpn',cpnConstructor)
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      }
+    })
+  </script>
+</body>
+</html>

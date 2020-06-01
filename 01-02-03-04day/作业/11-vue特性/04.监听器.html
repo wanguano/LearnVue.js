@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <input type="text" v-model="firstName">
+    <input type="text" v-model="lastName">
+    <h2>{{fullName}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 经常执行开销较大/或异步操作
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         firstName: 'li',
+         lastName: 'ming',
+        //  fullName: 'li ming'
+      },
+      watch: {
+        // 监听的 键要与实例上的属性 相同
+        // firstName(val) {
+        //   this.fullName = val +' '+ this.lastName;
+        // },
+
+        // lastName(val) {
+        //   this.fullName = this.firstName +' '+ val;
+        // }
+      },
+      computed: {
+        fullName() {
+          return this.firstName + ' ' + this.lastName;
+        }
+      },
+    })
+  </script>
+</body>
+</html>

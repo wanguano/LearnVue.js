@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn></cpn>
+    <cpn ref="aa"></cpn>
+    <cpn></cpn>
+    <button @click="btnClick">获取子组件对象</button>
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>{{name}}</h2>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 当父组件中想访问子组件中对象, 调用一些方法或者获取一些数据, 该怎么访问?
+    // 1. $children
+    // 访问的是全部的子组件数组对象
+    // 2. refs (用的比较多)
+    // 通过在使用自定义组件中, 定义 ref="aaa" , 对象形式访问
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      },
+      methods: {
+        btnClick() {
+          // 1.$children: 获取所有子组件对象
+          // console.log(this.$children);
+          // console.log(this.$children[2].name);
+          // this.$children[2].cmessage();
+          // for (const item of this.$children) {
+          //   console.log(item.name);z
+          //   item.cmessage()
+          // }
+
+          // 2. $refs: 获取指定子组件对象,默认是一个空的对象
+          console.log(this.$refs.aa.name);
+        }
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          methods: {
+            cmessage() {
+              console.log('我是子组件中的cmessage');
+            }
+          },
+          data() {
+            return {
+              name: '我是子组件中名字'
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

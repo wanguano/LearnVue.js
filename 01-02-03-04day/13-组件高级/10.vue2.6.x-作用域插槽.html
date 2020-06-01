@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 在使用子组件中, 对组件展示的内容不满意, 在父作用域对子组件展示的内容进行修改 -->
+    <current-user>
+      <!-- 在这里想访问子组件中的 user 数据 -->
+      <template v-slot:default="slotProps">
+        {{slotProps.user.firstName}}
+      </template>
+    </current-user>
+
+  </div>
+
+  <template id="cpn">
+    <div>
+      <span>
+        <!-- 为了让 user 在父级插槽中可用, 我们将 user 作为 <slot> 元素的一个属性绑定 -->
+        <slot :user="user">{{user.lastName}}</slot>
+      </span>
+    </div>
+  </template>
+
+  <script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好',
+      },
+      components: {
+        currentUser: {
+          template: '#cpn',
+          data() {
+            return {
+              user: {
+                lastName: '亦凡',
+                firstName: '吴'
+              }
+            }
+          },
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

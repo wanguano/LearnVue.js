@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <input type="text" v-model.number="n1">
+    <select name="" id="" v-model="operator">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="text" v-model.number="n2">
+    <button @click="getResult">=</button>
+    <input type="text" v-model="result" readonly>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         n1: '',
+         operator: '',
+         n2: '',
+         result: ''
+      },
+      methods: {
+        getResult() {
+          let result = this.n1 + this.operator + this.n2; 
+          // 参数: 字符串表达式
+          // 返回值: 返回结果
+          this.result = eval(result);
+        }
+      },
+    })
+  </script>
+</body>
+</html>

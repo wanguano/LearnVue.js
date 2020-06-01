@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn :c-message="message"></cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>hello jack</h2>
+      <h2>{{cMessage}}</h2>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 接收的属性如果是驼峰标识
+    // 驼峰标识前. 用 - 代替
+    Vue.component('cpn',{
+      template:'#cpn',
+      props: {
+        cMessage: String
+      }
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      }
+    })
+  </script>
+</body>
+</html>

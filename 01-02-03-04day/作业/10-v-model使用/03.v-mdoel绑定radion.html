@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <label for="man">男</label>
+    <input type="radio" name="sex" id="man" v-model="value" value="男"> 
+    <br>
+    <br>
+    <label for="gril">女</label><input type="radio" value="女" v-model="value" name="sex" id="gril">
+    <br>
+    <br>
+    <h2>{{value}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-model绑定 
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        value: ''
+      }
+    })
+  </script>
+</body>
+
+</html>

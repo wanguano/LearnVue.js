@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <cpn><button>按钮</button></cpn>
+    <cpn><span>我是span</span></cpn>
+    <cpn><i>我是斜体</i></cpn>
+    <cpn>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>我是内容哈哈哈</h2>
+      <p>我是内容,呵呵呵</p>
+      <slot><button>按钮</button></slot>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 有时我们封装的组件: 想具备有更多的扩展性 (例如京东的导航栏)
+    // 这个时候在子组件中使用 slot 插槽
+    // 需求: 在使用子组件中展示不同的内容
+    // 使用: 在子组件中使用 slot 插槽, 使用子组件中在标签中 定义扩展的内容(如果只有一个插槽,默认填充) 
+    // 总结: slot 插槽让组件更具备有扩展性
+    // slot默认值: 多个组件内中的扩展内容相同时可以设置默认值
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      },
+      components: {
+        cpn: {
+          template: '#cpn'
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

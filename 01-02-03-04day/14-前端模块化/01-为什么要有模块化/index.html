@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 演示了: 多人协作开发时, 使用原始模块化遇到的问题
+        小明: 
+        小红: 
+        演示: 都定义了相同的全局变量, 在新的js文件判断出了问题(JS原始遗留问题)   
+        如何解决: 匿名函数的解决方案
+        解决数据访问的问题: 我们在匿名函数中定义的变量/数据, 如果在其他 js 文件中使用?
+                          解决方案: 匿名函数 return 回需要的变量
+  -->
+</body>
+<script src="./aaa.js"></script>
+<script src="./bbb.js"></script>
+<script src="./mmm.js"></script>
+</html>

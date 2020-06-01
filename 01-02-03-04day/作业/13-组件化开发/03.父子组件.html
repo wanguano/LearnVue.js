@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn2></cpn2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 父子组件
+
+    // 创建一个组件构造器(子组件)
+    const cpnC1 = Vue.extend({
+      template: `
+        <div>
+          <h2>我是标题1</h2>
+          <p>我是内容,哈哈哈哈</p>
+          <p>我是内容,呵呵呵</p>
+        </div>
+      `
+    })
+
+    // 创建第二个子组件构造器(父组件)
+    const cpnC2 = Vue.extend({
+      template: `
+        <div>
+          <h2>我是标题1</h2>
+          <p>我是内容,哈哈哈哈</p>
+          <p>我是内容,呵呵呵</p>
+          <cpn1></cpn1>
+        </div>
+      `,components: {
+        cpn1: cpn1
+      }
+    })
+    
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      },
+      components: {
+        cpn2: cpnC2
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <input type="text" v-model="message">
+    <h2>{{message}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-model :双向数据绑定
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      }
+    })
+  </script>
+</body>
+
+</html>

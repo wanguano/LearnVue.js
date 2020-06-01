@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 指向替换掉中间的插槽怎么办?
+        1.默认会全部插入会全部替换掉
+        2.使用具名插槽
+          (1)给插槽起名字
+          (2)替换掉指定的插槽, slot="起的名字"
+          (3)默认会替换掉没有起名字的插槽 -->
+    <cpn>
+      <span slot="center">使用具名替换指定插槽</span>
+    </cpn>
+
+  </div>
+  <template id="cpn">
+    <div>
+      <slot name="left"><span>我是左边</span></slot>
+      <slot name="center"><i>我是中间</i></slot>
+      <slot name="right"><strong>我是右边</strong></slot>
+      <slot>我是没有具名的插槽</slot>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 当我们你有多个插槽时, 要替换掉指定的插槽该怎么做?
+    // 使用具名插槽
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      },
+      components: {
+        cpn: {
+          template: '#cpn'
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

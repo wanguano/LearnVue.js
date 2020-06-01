@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <h2>{{message}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      },
+      beforeCreate() {
+        console.log('DOM结构都没有初始化什么都做不了');
+      },
+      created() {
+        console.log('此时data和methods已经可以使用,但是页面还没渲染出来');
+      },
+      beforeMount() {
+        console.log('在挂载开始之前被调用此时页面上还看不到真实数据只是一个模板页面而已');
+      },
+      mounted() {
+        console.log('数据已经真实渲染到页面当中');
+      },
+      beforeUpdate() {
+        console.log(`数据更新时调用，发生在虚拟DOM打补丁之前。页面上数据还是旧的`);
+      },
+      updated() {
+        console.log('由于数据更改导致的虚拟DOM重新渲染和打补丁,在这之后会调用该钩子。页面上数据已经替换成最新的');
+      },
+      beforeDestroy() {
+        console.log('实例销毁之前调用');
+      },
+      destroyed() {
+        console.log('实例销毁后调用');
+      },
+    })
+  </script>
+</body>
+
+</html>

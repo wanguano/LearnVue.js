@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn>完成</cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <a :href="url">
+        <!-- 由使用者界定渲染什么 -->
+        <slot></slot>
+      </a>
+    </div>
+  </template>
+   <script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+  <script>
+    // 插槽
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          data() {
+            return {
+              url: 'http://www.baidu.com'
+            }
+          },
+        }
+      }
+    })
+  </script>
+</body>
+</html>

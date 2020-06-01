@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <input type="text" v-focus>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 为何需要自定义指令?
+    // 内置指令不满足需求
+
+    // 获取焦点指令 directive
+    // 参数1:焦点名
+    // 2.对象
+    Vue.directive('focus',{
+      inserted(el) {
+        el.focus();
+      }
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <base-layout>
+      <!-- <template v-slot:left>
+          <p>填上左边的坑</p>
+      </template> -->
+
+      <!-- 缩写形式: # -->
+      <template #left>
+        <p>填上左边的坑</p>
+    </template>
+
+    <template #default>
+      <p>默认插槽的坑</p>
+    </template>
+
+    </base-layout>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <slot name="left"></slot>
+      <slot name="right"></slot>
+      <slot name="center"></slot>
+      <button><slot></slot></button>
+    </div>
+  </template>
+
+   <script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      },
+      components: {
+        baseLayout: {
+          template: '#cpn',
+
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

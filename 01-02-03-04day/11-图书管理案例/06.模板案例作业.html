@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    .grid {
+      margin: auto;
+      width: 530px;
+      text-align: center;
+    }
+
+    .grid table {
+      border-top: 1px solid #C2D89A;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .grid th,
+    td {
+      padding: 10;
+      border: 1px dashed #F3DCAB;
+      height: 35px;
+      line-height: 35px;
+    }
+
+    .grid th {
+      background-color: #F3DCAB;
+    }
+
+    .grid .book {
+      padding-bottom: 10px;
+      padding-top: 5px;
+      background-color: #F3DCAB;
+    }
+
+    .grid .count {
+      height: 35px;
+      line-height: 35px;
+      background-color: #F3DCAB;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="grid">
+      <div>
+        <h1>图书管理</h1>
+        <div class="book">
+          <div>
+            <label for="id">
+              编号：
+            </label>
+            <input type="text" id="id" >
+            <label for="name">
+              名称：
+            </label>
+            <input type="text" id="name" >
+            <button>提交</button>
+          </div>
+        </div>
+        <div class="count">
+          <span>数量:</span>
+          <span>计算属性实现</span>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>三国演义</td>
+            <td>2525609975000</td>
+            <td>
+              <a href="" >修改</a>
+              <span>|</span>
+              <a href="" >删除</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript">
+    /*
+      图书管理-添加图书
+      需求: 1.列表展示(v-for :key)
+            2.图书添加(双向绑定,追加数据)
+            3.修改图书(根据id查询出要编辑的数据) filter,修改时编号按钮禁用
+            4.在提交时,判断按钮是否禁用,禁用时是编辑更新,非禁用时是添加
+            5.删除图书 findIndex或filter都可以
+            6.常用特性⬇⬇⬇
+    */
+    // 过滤器(格式化日期)
+    function dateFormat(date, format) {
+        if (typeof date === "string") {
+          var mts = date.match(/(\/Date\((\d+)\)\/)/);
+          if (mts && mts.length >= 3) {
+            date = parseInt(mts[2]);
+          }
+        }
+        date = new Date(date);
+        if (!date || date.toUTCString() == "Invalid Date") {
+          return "";
+        }
+        var map = {
+          "M": date.getMonth() + 1, //月份 
+          "d": date.getDate(), //日 
+          "h": date.getHours(), //小时 
+          "m": date.getMinutes(), //分 
+          "s": date.getSeconds(), //秒 
+          "q": Math.floor((date.getMonth() + 3) / 3), //季度 
+          "S": date.getMilliseconds() //毫秒 
+        };
+
+        format = format.replace(/([yMdhmsqS])+/g, function (all, t) {
+          var v = map[t];
+          if (v !== undefined) {
+            if (all.length > 1) {
+              v = '0' + v;
+              v = v.substr(v.length - 2);
+            }
+            return v;
+          } else if (t === 'y') {
+            return (date.getFullYear() + '').substr(4 - all.length);
+          }
+          return all;
+        });
+        return format;
+      }
+    // 自定义指令(获取表单焦点)
+    // 计算属性(统计图书数量)
+    // 侦听器(验证图书存在性)
+    // 生命周期(图书数据处理)
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        books: [{
+          id: 1,
+          name: '三国演义',
+          date: 2525609975000
+        }, {
+          id: 2,
+          name: '水浒传',
+          date: 2525609975000
+        }, {
+          id: 3,
+          name: '红楼梦',
+          date: 2525609975000
+        }, {
+          id: 4,
+          name: '西游记',
+          date: 2525609975000
+        }],
+      },
+      
+
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <current-user>
+      <!-- 解构插槽Prop, slot 的值可以是JS表达式 -->
+      <!-- <template v-slot="{ user }">
+        {{user.firstName}}
+      </template> -->
+
+      <!-- 重命名(起别名), 将 user 重命名为 person  -->
+      <!-- <template v-slot="{ user: person }">
+        {{person.firstName}}
+      </template> -->
+
+
+      <!-- 定义后备(默认)内容 场景: 用于插槽 prop 是 undefined 的情形 -->
+      <template v-slot="{ user= {firstName: '李'} }">
+        {{user.firstName}}
+      </template>
+
+
+    </current-user>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <span>
+        <!-- 为了让 user 在父级插槽中可用, 我们将 user 作为 <slot> 元素的一个属性绑定 -->
+        <slot :user="user">{{user.lastName}}</slot>
+      </span>
+    </div>
+  </template>
+
+  <script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好',
+      },
+      components: {
+        currentUser: {
+          template: '#cpn',
+          data() {
+            return {
+              user: {
+                lastName: '亦凡',
+                firstName: '吴'
+              }
+            }
+          },
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

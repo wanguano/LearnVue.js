@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <cpn></cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>how are you?</h2>
+      <div>I am fine, And you?</div>
+      <div>{{message}}</div>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 组件中的 data 为什么是函数?
+    // 如果是对象会发生什么?
+    // 1. 如果是 data 对应的是对象的对象的话,会报错
+    // 2. 数据改变后会互相影响
+    // 组件中的data如果是返回的新的对象引用地址的话
+    //     1.组件之间的数据是相互独立存在的
+    //     2.数据改变之后,不会相相互影响
+
+
+    Vue.component('cpn', {
+      template: '#cpn',
+      data() {
+        return {
+          message: 'I am very fine,too'
+        }
+      }
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      }
+    })
+  </script>
+  <script>
+    // 为什么组件中的 data 函数不能是对象
+    // 一个组件可以复用, 数据要相互对立
+    // 因为 组件中的 data 如果是对象的的的话, 引入的都是同一个对象, 数据修改了会互相影响
+
+    // var data = {
+    //   data: 'c1'
+    // }
+
+    // // 但是data如果是一个函数, 返回的对象( 每次返回的对象是相互独立的 )
+    // // 每次调用返回的都是新开辟的内存空间
+    // function c1() {
+    //   return data
+    // }
+
+    // var c11 = c1();
+    // var c2 = c1();
+
+    // c2.data = 'c2'
+
+    // console.log(c11);
+    // console.log(c2);
+  </script>
+</body>
+
+</html>

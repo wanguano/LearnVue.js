@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 监听事件, 这里的大写自动转换为小写 -->
+    <cpn @item-click="cpnClick"></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <button v-for="item in categories" @click="btnClick(item.name)">{{item.name}}</button>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 子传父
+    // 通过自定义事件
+
+    // 需求: 子组件向父组件传值
+    // 1.发射事件
+    // 2.在使用组件时定义事件
+
+    /* 1.在子组件中点击触发. 发射/出触发事件
+        2.在使用组件时, 监听定义的事件, 在实例事件中接收
+        3.在父组件中方法接收数据
+    */
+
+    // 发射事件名和在使用组件时的事件名要一致
+    // 在实例上接收监听的事件,得到子组件中传递的数据
+
+    Vue.component('cpn',{
+      template: '#cpn',
+      data() {
+        return {
+          categories: [
+            { id: 'aaa', name: '热门推荐' },
+            { id: 'bbb', name: '手机数码' },
+            { id: 'ccc', name: '家用家电' },
+            { id: 'ddd', name: '电脑办公' },
+          ]
+        }
+      },
+      methods: {
+        btnClick(name) {
+          // 发射事件
+          this.$emit('item-click',name)
+        }
+      },
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好',
+      },
+      methods: {
+        cpnClick(item) {
+          console.log(item);
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

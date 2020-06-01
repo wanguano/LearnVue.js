@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 父组件想改变子组件展示, 如果做呢? -->
+    <cpn></cpn>
+    <!-- 这里子组件展示的数组, 父组件想重新展示 (数据还是自组建的) -->
+    <cpn>
+      <!-- 目的: 获取到子组件中的数据, 修改展示的内容 -->
+      <!-- 在Vue 2.5.x 版本以下需要: 一个template 来接收传递来的数据, 在 2.5.x以上可以不用 template 标签 -->
+      <div slot-scope="slot">
+        <span v-for="item in slot.data">{{item}} - </span>
+      </div>
+    </cpn>
+<br>
+    <cpn>
+      <div slot-scope="slot">
+        <span v-for="item in slot.data">{{item}} * </span>
+      </div>
+    </cpn>
+  </div>
+
+
+  <template id="cpn">
+    <div>
+      <!-- 在 slot 自定义一个属性来接收要传递展示的数据 -->
+      <slot :data="languges">
+        <ul>
+          <li v-for="itme in languges">{{itme}}</li>
+        </ul>
+      </slot>
+    </div>
+  </template>
+
+
+   <script src='../js/vue.js'></script>
+  <script>
+    // 希望父组件更改子组件展示
+    /*  修改子组件展示的内容
+        语法: 1. 在子组件插槽中绑定自定义一个属性用来接收要展示的数据
+              2. 在使用子组件中,获取到传递过来的数据,进行修改(获取子组件要展示的数据)
+        总结: 在父组件中展示子组件的内容, 对子组件的内容展示不满意
+            在其插槽中获取子组件展示的数据, 进行重新修改展示内容 */
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          data() {
+            return {
+              languges: ['javaScript', 'C#', 'Go', 'C++', 'PHP', 'swift']
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

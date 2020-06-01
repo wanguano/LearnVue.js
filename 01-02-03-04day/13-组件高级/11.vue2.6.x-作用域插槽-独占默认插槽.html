@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+
+    <current-user v-slot="slotProps">
+      {{slotProps.user.lastName}}
+    </current-user>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <!-- 不带name的slot标签, 是默认插槽 -->
+      <slot :user="user"></slot>
+    </div>
+  </template>
+
+  <script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      },
+      components: {
+        currentUser: {
+          template: '#cpn',
+          data() {
+            return {
+              user: {
+                firstName: '吴',
+                lastName: '亦凡'
+              }
+            }
+          },
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

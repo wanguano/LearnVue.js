@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 不推荐的example -->
+    <ul>
+      <li v-for="user in users" v-if="user.isActive" :key="user.id">
+        {{ user.name }}
+      </li>
+    </ul>
+
+    <!-- 推荐的例子 -->
+    <ul>
+      <li
+        v-for="user in activeUsers"
+        :key="user.id"
+      >
+        {{ user.name }}
+      </li>
+    </ul>
+
+    
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-if 和 v-for 同时使用时推荐使用计算属性, 来过滤掉不想要的数据
+    // 原因: 如果使用了 if 判断, 每次渲染在Vue内部都会遍历整个列表, 不论判断条件是否发生了变化
+
+    // 使用了计算属性好处: 
+    // 1 过滤后的列表只会在users数组发生相关变化时才被重新运算,过滤更高效。
+    // 2 使用v-for="user in activeUsers"之后,我们在渲染
+    // 3 的时候只遍历活跃用户,渲染更高效。
+    // 4 解耦渲染层的逻辑,可维护性(对逻辑的更改和扩展)更强。
+    // 详细讲解: https://cn.vuejs.org/v2/style-guide/#%E9%81%BF%E5%85%8D-v-if-%E5%92%8C-v-for-%E7%94%A8%E5%9C%A8%E4%B8%80%E8%B5%B7%E5%BF%85%E8%A6%81
+
+
+    // 永远不要把v-ift和v-for同时用在同一个元素上。
+    // 总结: 避免v-if和v-for用在一起
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        users: [{ name: '💜点.五', isActive: true }, { name: '张大力', isActive: false }, { name: '触点秦.', isActive: false }, { name: '五大天', isActive: true }]
+      },
+      computed: {
+        activeUsers() {
+          return this.users.filter(item => item.isActive)
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

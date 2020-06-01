@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <input type="checkbox" name="" v-model="isSelector" id="">
+    <h2>{{isSelector}}</h2>
+    <input type="checkbox" v-model="movies" value="彩瓦厂">彩瓦厂
+    <input type="checkbox" v-model="movies" value=出翁出翁"">出翁出翁
+    <input type="checkbox" v-model="movies" value="承认为">承认为
+    <h2>{{movies}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 复选框 单个复选款  绑定的是Boolean
+    //        多个复选款  绑定的是数组
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        isSelector: '',
+        movies: []
+      }
+    })
+  </script>
+</body>
+</html>

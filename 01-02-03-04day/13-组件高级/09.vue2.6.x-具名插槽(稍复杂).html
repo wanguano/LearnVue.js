@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn>
+      <!-- 向具名插槽提供内容, 我们在template元素上使用 v-slot 指令 -->
+      <template v-slot:header>
+        <h1>Here might a page title</h1>
+      </template>
+
+      <!-- 默认会填没有具名插槽的坑 -->
+      <template v-slot:default>
+        <p>我是填的主要内容元素的坑</p>
+        <p>主要内容</p>
+      </template>
+
+      <template v-slot:footer>
+          <p>这里是页脚</p>
+      </template>
+    </cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <header>
+        <!-- 我们希望页头放在这里 -->
+        <slot name="header"></slot>
+      </header>
+      <main>
+        <!-- 我们希望主要内容放在这里 -->
+        <!-- 不带 name 的 slot 默认name包含 "default" -->
+        <slot></slot>
+      </main>
+      <footer>
+        <slot name="footer"></slot>
+        <!-- 我们希望页脚放在这里 -->
+      </footer>
+    </div>
+  </template>
+
+   <script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      },
+      components: {
+        cpn: {
+          template: '#cpn'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

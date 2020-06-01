@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <input type="text" v-focus>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 只在当前组件/实例生效
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      },
+      directives: {
+        focus: {
+          inserted(el) {
+            el.focus()
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

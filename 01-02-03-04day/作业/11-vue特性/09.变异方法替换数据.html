@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    请输入<input type="text" v-model="fruit">
+    <button @click="add">添加</button>
+    <button @click="del">删除</button>
+    <button @click="splice">替换</button>
+    <li v-for="item in fruits">{{item}}</li>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         fruit: '',
+         fruits: ['苹果','香蕉','榴莲','梨']
+      },
+      methods: {
+        add() {
+          this.fruits.push(this.fruit)
+        },
+        del(){
+          this.fruits.pop()
+        },
+        splice() {
+          this.fruits.splice(2,2,'京哈计划','可从我开车')
+        }
+      },
+    })
+  </script>
+</body>
+</html>

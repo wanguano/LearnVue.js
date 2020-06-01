@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h2>{{count}}</h2>
+    <cpn  @showcount="showCount"></cpn>
+  </div>
+<template id="cpn">
+  <div>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+  </div>
+</template>
+  <script src='../js/vue.js'></script>
+  <script>
+    /* 在子组件中定义点击加减按钮 将数量传递给父组件进行显示 */
+
+    const cpn = {
+      template: '#cpn',
+      data() {
+        return {
+          count: 0
+        }
+      },
+      methods: {
+        increment() {
+          this.count++;
+          this.$emit('showcount',this.count)
+        },
+        decrement() {
+          this.count--;
+          this.$emit('showcount',this.count)
+        }
+      }
+    }
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         count: 0
+      },
+      components: {
+        cpn
+      },
+      methods: {
+        showCount(val) {
+          this.count = val;
+        }
+      }
+    })
+  </script>
+</body>
+</html>

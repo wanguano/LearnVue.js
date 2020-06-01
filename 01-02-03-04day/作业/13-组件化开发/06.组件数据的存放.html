@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn></cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>{{message}}</h2>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 组件中也需要定义数据, 怎么办?
+    // 组件中也有 对应的 data 存放数据
+    // 但是组件中的 data 数据有些 diff
+    // 组件中的 data 必须是 一个函数, 必须要返回一个新的对象, 在返回的对象定义数据
+    // 组件中的 data: 必须是个函数, 返回一个新的对象, 数据定义在新的对象例
+    Vue.component('cpn',{
+      template: '#cpn',
+      data() {
+        return {
+          message: 'hello jack'
+        }
+      }
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      }
+    })
+  </script>
+</body>
+</html>

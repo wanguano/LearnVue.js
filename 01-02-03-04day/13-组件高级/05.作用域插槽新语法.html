@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- 只有 cpn 组件内才可以访问到 lastName ,而我们能提供的内容是在父级渲染的 -->
+    <!-- <cpn>
+      {{firstName}}
+    </cpn> -->
+
+    <!-- <cpn >
+      <template v-slot="slotProps">
+        {{slotProps.user.firstName}}
+      </template>
+    </cpn> -->
+
+    <!-- <cpn > -->
+      <!-- v-slot:[指定的具名]="slotProps" slotProps(可以随意起名,是访问子组件的对象) -->
+      <!-- <template v-slot:s1="slotProps">
+        {{slotProps.users.firstName}}
+      </template>
+      <template v-slot:s2="slotProps">
+        {{slotProps.users.book}}
+      </template> -->
+    
+    <!-- </cpn> -->
+
+    <!-- 独占默认插槽写法 -->
+      <cpn v-slot="slotProps">
+        <!-- 填充指定具名 -->
+        {{slotProps.u}}
+      </cpn>
+
+
+  </div>
+
+
+  <template id="cpn">
+    <div>
+      <!-- <slot :users="user" name="s1">{{user.lastNmae}}</slot>
+      <slot :users="user" name="s2">{{user.lastNmae}}</slot> -->
+      <!-- <slot :user="message"></slot> -->
+      <!-- <slot :da="movies"></slot> -->
+
+      <slot :u="user"></slot>
+    </div>
+  </template>
+
+   <script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          data() {
+            return {
+              user: {
+                lastNmae: '亦凡',
+                firstName: '吴',
+                book: '代码大全'
+              },
+              message: '我是子组件中的消息',
+              movies: ['这个','那个']
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

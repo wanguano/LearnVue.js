@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <input type="text" v-model="message">
+    <h2>{{message}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // v-model 双向数据绑定?
+    // 单向数据绑定: 将model中的数据渲染到 DOM 当中就是单项数据绑定
+    // 双向数据绑定: 从model到view, 再从view 到 model
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      }
+    })
+  </script>
+</body>
+</html>

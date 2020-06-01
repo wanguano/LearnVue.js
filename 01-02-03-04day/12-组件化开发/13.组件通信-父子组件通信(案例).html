@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- <h1>{{num1}}</h1>
+    <h1>{{num2}}</h1> -->
+    <cpn :num1="num1" :num2="num2" @num1change="num1change" @num2change="num2change" />
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>props:{{num1}}</h2>
+      <h2>data:{{dnum1}}</h2>
+      <input type="text" :value="dnum1" @input="num1change">
+      <h2>props:{{num2}}</h2>
+      <h2>data:{{dnum2}}</h2>
+      <input type="text" :value="dnum2" @input="num2change">
+
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 父传子
+    // 1. props 
+    // 2. v-bind绑定定义的属性 传递
+
+    /* Vue 不推荐 在子组件修改父组件传递过来的值
+    建议: 使用 子组件中的 data 或 computed  */
+    // props: 父组件传递到子组件中的值
+
+    /* 知识点: 1.在子组件修改父组件传递的值会报错(Vue不推荐我们这么做,  建议: 使用 子组件中的 data 或 computed) 
+      2.在子组件中 双向绑定 data 中的数据
+      3.将双向绑定的数据传递给 父组件(传递给父组件中传递给子组件中的值)
+
+    */
+
+    const cpn = {
+      template: '#cpn',
+      props: {
+        num1: Number,
+        num2: Number
+      },
+      methods: {
+        num1change(even) {
+          this.dnum1 = even.target.value;
+          // 发射/触发事件
+          this.$emit('num1change', even.target.value)
+          // 将num2的值 乘 100 倍
+          this.dnum2 = this.dnum1 * 100;
+          this.$emit('num2change', even.target.value)
+        },
+        num2change(even) {
+          this.dnum2 = even.target.value;
+          // 发射/触发事件
+          this.$emit('num2change', even.target.value)
+          // 将num1的值小于 100 倍
+          this.dnum1 = this.dnum2 / 100;
+          this.$emit('num1change', even.target.value)
+        },
+
+      },
+      data() {
+        return {
+          dnum1: 1,
+          dnum2: 2
+        }
+      }
+    }
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        num1: 1,
+        num2: 2
+      },
+      methods: {
+        num1change(val) {
+          this.num1 = parseInt(val);
+        },
+        num2change(val) {
+          this.num2 = parseInt(val);
+        }
+      },
+      components: {
+        cpn
+      }
+    })
+  </script>
+</body>
+
+</html>

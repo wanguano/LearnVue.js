@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn1></cpn1>
+    <cpn2></cpn2>
+  </div>
+  <template id="cpn1">
+    <div>
+      <h2>我是标题</h2>
+      <div>我是内容,哈哈哈</div>
+      <div>我是内容,呵呵呵</div>
+    </div>
+  </template>
+
+  <script type="text/x-template" id="cpn2">
+    <div>
+      <h2>我是标题</h2>
+      <div>我是内容,哈哈哈</div>
+      <div>我是内容,呵呵呵</div>
+    </div>
+  </script>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 1.在HTML中定义模板(从JS中抽取出去, 易于维护)
+    // 2.注册组件
+    Vue.component('cpn1',{
+      template: '#cpn1'
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      },
+      components: {
+        cpn2: {
+          template: '#cpn2'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

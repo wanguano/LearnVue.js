@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h1>绑定单个值</h1>
+    <select name="" id="" v-model="hobbies">
+      <option value="你好">你好</option>
+      <option value="羽毛球">羽毛球</option>
+      <option value="兰奇">兰奇</option>
+      <option value="足球">足球</option>
+    </select>
+    <h2>{{hobbies}}</h2>
+    <h1>绑定多个值</h1>
+    <select name="" id="" v-model="hobbies" multiple>
+      <option value="你好">你好</option>
+      <option value="羽毛球">羽毛球</option>
+      <option value="兰奇">兰奇</option>
+      <option value="足球">足球</option>
+    </select>
+    <h2>{{hobbies}}</h2>
+  </div>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        hobbies: ''
+      }
+    })
+  </script>
+</body>
+</html>

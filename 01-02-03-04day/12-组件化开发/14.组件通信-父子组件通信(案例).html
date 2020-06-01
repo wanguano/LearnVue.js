@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+  <cpn :num1="fnum1" :num2="fnum2" @num1change="change1" @num2change="change2"></cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <h3>props:{{num1}}</h3>
+      <h3>{{dnum1}}</h3>
+      <input type="text" :value="dnum1" @input="num1change"> 
+      <h3>props:{{num2}}</h3>
+      <h3>{{dnum2}}</h3>
+      <input type="text" :value="dnum2" @input="num2change">
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    /* 不推荐子组件中修改负组件中的值
+    建议使用: 计算属性,或data
+    将双向绑定的值传递给父组件 */
+    // 父传子
+    const cpn = {
+      template: '#cpn',
+      props: {
+        num1: Number,
+        num2: Number
+      },
+      data() {
+        return {
+          dnum1:1,
+          dnum2:2
+        }
+      },
+      methods: {
+        num1change(even) {
+          this.dnum1 = even.target.value;
+          this.$emit('num1change',this.dnum1);
+          // 将dnum2值增加 100 倍
+          this.dnum2 = this.dnum1 * 100;
+          this.$emit('num2change',this.dnum2);
+        },
+        num2change(even) {
+          this.dnum2 = even.target.value;
+          this.$emit('num2change',this.dnum2);
+            // 将dnum1值缩小 100 倍
+            this.dnum1 = this.dnum2 / 100;
+          this.$emit('num1change',this.dnum1);
+        }
+      },
+    }
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         fnum1: 1,
+         fnum2: 2
+      },
+      components: {
+        cpn
+      },
+      methods: {
+        change1(val) {
+          this.fnum1 = parseInt(val);
+        },
+        change2(val) {
+          this.fnum2 = parseInt(val);
+        }
+      },
+    })
+  </script>
+</body>
+</html>
