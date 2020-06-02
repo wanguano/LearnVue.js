@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <button @click="getChildren">获取子组件对象</button>
+    <cpn ref="aaa"></cpn>
+    <cpn ></cpn>
+    <cpn ></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <ul>
+        <li v-for="item in movies">{{item}}</li>
+      </ul>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 在父组件访问子组件数据
+    // 当父组件中想访问子组件中对象, 调用一些方法或者获取一些数据, 该怎么访问?
+    // 1. $children
+    // 访问的是全部的子组件数组对象
+    // 2. refs (用的比较多)
+    // 通过在使用自定义组件中, 定义 ref="aaa" , 对象形式访问
+    const cpn = {
+      template: '#cpn',
+      data() {
+        return {
+          movies: ['海王', '海贼王', '航海王']
+        }
+      },
+    }
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      },
+      components: {
+        cpn
+      },
+      methods: {
+        getChildren() {
+          // 获取所有子组件对象: 数组形式
+          console.log(this.$children[0]);
+          // ref获取
+          console.log(this.$refs);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

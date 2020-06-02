@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <cpn />
+  </div>
+  <template id="cpn">
+    <div>
+      <button @click="getParent">获取父组件对象</button>
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 在子组件访问父组件 --> parent
+    const cpn = {
+      template: '#cpn',
+      methods: {
+        getParent() {
+          console.log(this.$parent);
+        }
+      },
+    }
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      },
+      components: {
+        cpn
+      }
+    })
+  </script>
+</body>
+
+</html>

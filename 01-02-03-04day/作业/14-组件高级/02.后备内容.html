@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn>
+    </cpn>
+  </div>
+  <script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+  <template id="cpn">
+    <div>
+      <button type="button">
+        <!-- 后备内容(默认) -->
+        <slot>Submit</slot>
+      </button>
+    </div>
+  </template>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      },
+      components: {
+        cpn: {
+          template: '#cpn'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

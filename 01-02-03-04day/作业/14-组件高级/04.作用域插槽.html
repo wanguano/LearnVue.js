@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn>
+      <template #default="{user}">
+          {{user.firstName}}
+      </template>
+    </cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <span>
+        <!-- 为了让 user 在父级插槽中可用, 我们将 user 作为 <slot> 元素的一个属性绑定 -->
+        <slot :user="user">{{user.lastName}}</slot>
+      </span>
+    </div>
+</template>
+  <script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+  <script>
+    /* 对子组件内容展示不满意, 进行重新修改展示 */
+    
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          data() {
+            return {
+              user: {
+                lastName: '亦凡',
+                firstName: '吴'
+              }
+            }
+          },
+        }
+      }
+    })
+  </script>
+</body>
+</html>

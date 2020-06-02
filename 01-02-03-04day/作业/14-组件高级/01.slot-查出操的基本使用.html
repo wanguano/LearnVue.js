@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn>我是父组件中的内容</cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <!-- 定义插槽 defined slot -->
+      <slot></slot> 
+    </div>
+  </template>
+  <script src='../js/vue.js'></script>
+  <script>
+    // 插槽的作用: 让我们使用组件更具备扩展性
+    // 动态的来决定插槽中的内容, 挖坑, 填坑
+    const cpn = {
+      template: '#cpn',
+
+    }
+    const vm = new Vue({
+      el: '#app',
+      data: {
+         message: '你好'
+      },
+      components: {
+        cpn
+      }
+    })
+  </script>
+</body>
+</html>

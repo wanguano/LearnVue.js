@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <cpn>
+      <!-- 替换指定的具名插槽 #代替 v-slot: -->
+      <template #header>
+        <h1>我是头部</h1>
+      </template>
+      <template #default>
+        <h1>我是主体内容</h1>
+      </template>
+      <template #footer>
+          <h3>页脚</h3>
+      </template>
+    </cpn>
+  </div>
+  <script src='https://cdn.bootcss.com/vue/2.6.11/vue.js'></script>
+
+  <template id="cpn">
+    <div>
+      <header>
+        <slot name="header"></slot>
+      </header>
+      <main>
+        <!-- 一个不带name的<slot>出口会带有隐含(默认)的名字"default" -->
+        <slot></slot>
+      </main>
+      <footer>
+        <slot name="footer"></slot>
+      </footer>
+    </div>
+  </template>
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '你好'
+      },
+      components: {
+        cpn: {
+          template: '#cpn'
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
