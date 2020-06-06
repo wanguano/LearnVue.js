@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 格式: (参数) => {具体实现}
+    const sum = function (a, b) {
+      return a + b;
+    }
+
+    const s = (a, b) => {
+      return a + b;
+    }
+
+    console.log(sum(5, 10));
+    console.log(s(5, 15));
+
+    // 参数缩写: 参数只有一项时,可以省略小括号
+    // [1,2,3,4].forEach(function (item,index) {
+
+    // })
+
+    // var a = [1, 2, 3, 4].forEach(item => console.log(item))
+    // console.log(a);
+
+    // 只有一行代码可以省略花括号, 并且将这行代码返回
+  const isInclue  =  [1, 2, 3, 4].some(item => item == 5)
+  console.log(isInclue);
+
+
+  </script>
+</body>
+
+</html>

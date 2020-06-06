@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 箭头函数的使用场景: 对数组进行操作,不需要this进行操作
+    // 箭头函数不绑定 this
+    // 箭头函数的this绑定的是上层作用域中的this
+
+    // setTimeout(function () {
+    //   console.log(this); // window
+    // },500)
+
+    // setTimeout(() => {
+    //   console.log(this);// window
+    // }, 1000);
+
+    const obj = {
+      a() {
+        setTimeout(function () {
+          console.log(this);
+        }, 500)
+
+        setTimeout(() => {
+          console.log(this);
+        }, 1000);
+      }
+    }
+
+    obj.a();
+
+    
+
+  </script>
+</body>
+
+</html>
