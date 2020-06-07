@@ -1,21 +1,15 @@
 <template>
   <div id="app">
-    <h2>APP组件</h2>
-    <!-- tag: 指定<router-link>组件渲染成什么元素 -->
-    <!-- replace: 没有history记录,前后键没有用 -->
-    <!-- active-class: 修改匹配成功默认添加的class类名 -->
-    <!-- <router-link to="/home" tag="button" replace active-class="active">首页</router-link>
-    <span class="gap"></span>
-    <router-link to="/about" tag="button" replace active-class="active">关于页面</router-link>
-
-    <router-link to="/home" tag="button" replace >首页</router-link>
-    <span class="gap"></span>
-    <router-link to="/about" tag="button" replace >关于页面</router-link>
-    <router-view></router-view> -->
-
-    <button @click="home">主页</button>
-    <button @click="about">关于</button>
+    <h2>APP组件</h2> 
+    <!-- 动态路由: 当我们进入用户页面时, 需要将当前的用户名加入到URL当中
+      1.在路由配置规则中: /:userId
+      2.将当天登录的用户名添加到Vue实例当中动态的显示
+      3.在user组件中获取当前登录的用户名 $route.params -->
+    <router-link to="/home">首页</router-link>
+    <router-link to="/about">关于</router-link>
+    <router-link :to="'/user/'+userId">用户</router-link>
     <router-view></router-view>
+
   </div>
 </template>
 
@@ -41,11 +35,16 @@ export default {
       this.$router.replace('/about')
     }
   },
+  computed: {
+    userId() {
+      return 'zhangsan'
+    }
+  },
 }
 </script>
 
 <style>
-.gap {
+.gap,a {
   margin: 20px;
 }
 .active {

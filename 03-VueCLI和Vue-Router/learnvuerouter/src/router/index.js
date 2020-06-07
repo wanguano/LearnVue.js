@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Vue from 'vue'
 import Home from '../components/Home.vue'
 import About from '../components/About.vue'
+import User from '../components/User.vue'
 
 // 1.通过Vue.use(插件), 安装插件
 Vue.use(VueRouter)
@@ -14,7 +15,7 @@ const routes = [
   path: '/',
   // 重定向到/home
   redirect: '/home'
-}, 
+},
 {
   path: '/home', // 根据不同的路劲
   component: Home // 渲染不同的组件
@@ -22,6 +23,10 @@ const routes = [
 {
   path: '/about',
   component: About
+},
+{
+  path: '/user/:userId',
+  component: User
 }]
 // 3.创建VueRouter对象
 const router = new VueRouter({
