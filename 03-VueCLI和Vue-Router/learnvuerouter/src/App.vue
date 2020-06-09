@@ -52,13 +52,19 @@ export default {
         }
       })
     }
-    
+
   },
   computed: {
     userId() {
       return 'zhangsan'
     }
   },
+  // create() 钩子函数: 当前组件被创建时,才会调用
+  mounted() {
+    // 但是有100个页面需要修改标题呢?
+    // document.title = '首页'
+    // console.log('create');
+  }
 }
 </script>
 

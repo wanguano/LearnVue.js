@@ -24,6 +24,10 @@ export default {
       console.log(this.$route);
     }
   },
+  mounted() {
+    // document.title = '用户页面'
+    // console.log('user');
+  },
 }
 </script>
 

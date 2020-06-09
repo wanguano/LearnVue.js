@@ -24,7 +24,7 @@ const routes = [
   // 配置默认路径
   path: '/',
   // 重定向到/home
-  redirect: '/home'
+  redirect: '/home',
 },
 {
   path: '/home', // 根据不同的路劲
@@ -43,7 +43,10 @@ const routes = [
   {
     path: 'message',
     component: Message
-  }]
+  }],
+  meta: {
+    title: '首页'
+  }
 },
 {
   path: '/about',
@@ -51,20 +54,40 @@ const routes = [
 },
 {
   path: '/user/:userId',
-  component: User
+  component: User,
+  meta: {
+    title: '用户'
+  }
 },
 {
   path: '/profile',
-  component: Profile
-}
-]
+  component: Profile,
+  meta: {
+    title: '档案'
+  }
+}]
 // 3.创建VueRouter对象
 const router = new VueRouter({
   // 配置路由和组件之间的应用关系
   routes,
   mode: 'history',
-  linkActiveClass: 'active'
+  linkActiveClass: 'active',
 })
+
+// 导航守卫(guard)
+router.beforeEach((to, from, next) => {
+  // 从from跳转到to
+  // from: 将要进行跳转的当前$route对象, 跳转前的一些操作
+  // to: 跳转后的当前$route对象, 跳转后的一些操作
+  // document.title = to.meta.title;
+  // document.title = to.matched[0].meta.title;
+  // console.log(to);
+  next()
+})
+
+// router.afterEach((to, from) => {
+// console.log(to.path);
+// })
 
 // 4.将router对象传入到Vue实例
 export default router

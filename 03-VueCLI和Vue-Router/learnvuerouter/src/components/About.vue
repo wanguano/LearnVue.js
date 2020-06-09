@@ -8,6 +8,10 @@
 <script>
 export default {
   name: "About",
+  mounted() {
+    // document.title = '关于页'
+    // console.log('About');
+  },
 }
 </script>
 
