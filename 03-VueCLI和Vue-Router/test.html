@@ -19,6 +19,8 @@
 </head>
 
 <body>
+  <!-- JS请求脚本请求会阻塞渲染 -->
+  <script src="http://localhost:3000/sources"></script>
   <div id="box"></div>
   <script>
     document.addEventListener('touchstart', (e) => {
@@ -111,10 +113,32 @@
     animation(document.getElementById('box'), {
       opacity: '.3',
       left: 500
-    },function () {
+    }, function () {
       console.log('ok');
     })
   </script>
+
 </body>
+<script>
+  const routes = [
+  {
+    path: '/home',
+    component: Home,
+    children: [
+    {
+      //
+      path: '',
+      redirect: 'news'
+    },
+    {
+      path: 'news',
+      component: News
+    },
+    {
+      path: 'message',
+      component: Message
+    }]
+  }]
+</script>
 
 </html>

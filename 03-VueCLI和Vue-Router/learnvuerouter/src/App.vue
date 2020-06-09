@@ -1,13 +1,18 @@
 <template>
   <div id="app">
-    <h2>APP组件</h2> 
-    <!-- 动态路由: 当我们进入用户页面时, 需要将当前的用户名加入到URL当中
-      1.在路由配置规则中: /:userId
-      2.将当天登录的用户名添加到Vue实例当中动态的显示
-      3.在user组件中获取当前登录的用户名 $route.params -->
+    <h2>APP组件</h2>
     <router-link to="/home">首页</router-link>
     <router-link to="/about">关于</router-link>
-    <router-link :to="'/user/'+userId">用户</router-link>
+    <!-- <router-link :to="'/user/'+userId">用户</router-link> -->
+    <!-- 参数的传递 -->
+    <!-- <router-link :to="{path: '/profile',query: {
+      name: 'wuyifan',
+      age: 18,
+      height: 1.88
+    }}">档案</router-link> -->
+
+    <button @click="userClick">用户</button>
+    <button @click="profileClick">档案</button>
     <router-view></router-view>
 
   </div>
@@ -33,7 +38,21 @@ export default {
       // console.log('about');
       // this.$router.push('/about')
       this.$router.replace('/about')
+    },
+    userClick() {
+      this.$router.push('/user/yifan')
+    },
+    profileClick() {
+      this.$router.push({
+        path: '/profile',
+        query: {
+          name: '亦凡',
+          age: 18,
+          height: 1
+        }
+      })
     }
+    
   },
   computed: {
     userId() {
@@ -44,7 +63,8 @@ export default {
 </script>
 
 <style>
-.gap,a {
+.gap,
+a {
   margin: 20px;
 }
 .active {
