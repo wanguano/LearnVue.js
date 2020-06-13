@@ -19,13 +19,13 @@
 </head>
 
 <body>
+  <button id="btn">点我</button>
   <!-- JS请求脚本请求会阻塞渲染 -->
-  <script src="http://localhost:3000/sources"></script>
+  <!-- <script src="http://localhost:3000/sources"></script> -->
   <div id="box"></div>
   <script>
+    
     document.addEventListener('touchstart', (e) => {
-      console.log(e.changedTouches[0].clientX);
-      console.log(e.changedTouches[0].clientY);
       if (document.querySelector('#xin')) {
         document.querySelector('#xin').remove();
       }
@@ -38,6 +38,22 @@
       div.style.left = e.changedTouches[0].clientX + 'px'
       div.style.top = e.changedTouches[0].clientY + 'px'
       document.body.appendChild(div)
+      div.style.opacity = 0;
+      document.body.append(div)
+      animation(div, {
+        opacity: 1,
+        fontSize: 45,
+      }, function () {
+        setInterval(() => {
+          animation(div,{
+            fontSize: 15
+          },function () {
+            animation(div,{
+              fontSize: 45
+            })
+          })
+        }, 300);
+      })
     })
 
     document.addEventListener('click', (e) => {
@@ -50,95 +66,129 @@
       window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
       div.id = 'xin';
       div.style.position = 'absolute'
-      div.style.fontSize = '28px'
-      div.style.color = '#7cb305'
+      div.style.fontSize = '15px'
+      div.style.color = 'rgb(245,34,45)'
       div.innerHTML = '❤';
-      div.style.left = e.pageX + 'px'
-      div.style.top = e.pageY + 'px'
-      document.body.appendChild(div)
+      div.style.left = e.pageX - 19 + 'px'
+      div.l = e.pageX - 19 + 'px'
+      div.style.top = e.pageY - 22 + 'px'
+      div.t = e.pageY - 22 + 'px'
+      div.style.opacity = 0;
+      document.body.append(div)
+      animation(div, {
+        opacity: 1,
+        fontSize: 45,
+      }, function () {
+        setInterval(() => {
+          animation(div,{
+            fontSize: 15
+          },function () {
+            animation(div,{
+              fontSize: 45
+            })
+          })
+        }, 600);
+
+        // setTimeout(() => {
+        //   animation(div, {
+        //     fontSize: 15,
+        //     left: e.pageX - 40,
+        //     top: e.pageY - 40,
+        //   }, function () {
+        //     animation(div, {
+        //       fontSize: 15,
+        //       left: e.pageX + 80,
+        //       top: e.pageY - 40,
+        //     }, function () {
+        //       animation(div, {
+        //         fontSize: 15,
+        //         left: e.pageX + 80,
+        //         top: e.pageY + 80,
+        //       }, function () {
+        //         animation(div, {
+        //           fontSize: 15,
+        //           left: e.pageX - 80,
+        //           top: e.pageY + 80,
+        //         }, function () {
+        //           animation(div, {
+        //             fontSize: 15,
+        //             left: e.pageX - 80,
+        //             top: e.pageY - 40,
+        //           },function () {
+        //             animation(div,{
+        //               left: e.pageX - 80 + 'px',
+        //               top : e.pageY - 80 + 'px',
+        //               fontSize: 45,
+        //             })
+        //           })
+        //         })
+        //       })
+        //     })
+        //   })
+        // }, 100)
+     
+      })
+
+
     })
 
-    //获取任意一个元素的任意一个属性值
+    let box = document.querySelector('#box')
+    animation(box, {
+      opacity: .2
+    })
+
     function getStyle(element, attr) {
-      //先判断当前浏览器是否支持该方法
       return window.getComputedStyle ? window.getComputedStyle(element, null)[attr] : element.currentStyle[attr];
     }
 
+    
+
     function animation(element, json, fn) {
-      clearInterval(element.timeId); //先清理定时器
-      //定时器,返回的是定时器的id
+      clearInterval(element.timeId);
+
       element.timeId = setInterval(function () {
-        var flag = true; //默认、假设,全部到达目标
-        //遍历json对象中的每个属性还有属性对应的目标值
+        var flag = true;
+
         for (var attr in json) {
-          //判断这个属性attr中是不是opacity
+
           if (attr == "opacity") {
-            //获取元素当前的透明度,当前的透明度放大100被,方便计算
+
             var current = getStyle(element, attr) * 100;
-            //目标透明放大100倍
+
             var target = json[attr] * 100;
             var step = (target - current) / 10;
             step = step > 0 ? Math.ceil(step) : Math.floor(step);
-            current += step; //移动后的值
+            current += step;
             element.style[attr] = current / 100;
-          } else if (attr == "zIndex") { //判断这个属性attr是不是zIndex
-            //层级改变就是直接改变这个属性的值
+          } else if (attr == "zIndex") {
+
             element.style[attr] = json[attr];
-          } else { //普通的属性
+          } else {
             var current = parseInt(getStyle(element, attr));
-            //当前属性对应的目标值
+
             var target = json[attr];
             var step = (target - current) / 10;
             step = step > 0 ? Math.ceil(step) : Math.floor(step);
             current += step;
             element.style[attr] = current + "px";
           }
-          if (current != target) { //是否到达目标
+          if (current != target) {
             flag = false;
           }
         }
-        if (flag) { //到达目标
-          clearInterval(element.timeId); //清理定时器
-          //所有属性到达目标才能使用这个函数,前提是用户传入这个函数
+        if (flag) {
+          clearInterval(element.timeId);
+
           if (fn) {
             fn();
           }
         }
 
-        //测试代码
-        console.log("当前：" + current + ",目标：" + target + ",每次移动的步数：" + step)
+
+
       }, 25);
     }
-
-    animation(document.getElementById('box'), {
-      opacity: '.3',
-      left: 500
-    }, function () {
-      console.log('ok');
-    })
   </script>
-
 </body>
-<script>
-  const routes = [
-  {
-    path: '/home',
-    component: Home,
-    children: [
-    {
-      //
-      path: '',
-      redirect: 'news'
-    },
-    {
-      path: 'news',
-      component: News
-    },
-    {
-      path: 'message',
-      component: Message
-    }]
-  }]
-</script>
-
+ 
 </html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var script = document.createElement('script');
+    script.src = 'https://cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js'
+    document.body.append(script)
+    setTimeout(() => {
+      document.addEventListener('click', (e) => {
+      console.log(e.pageX);
+      console.log(e.pageY);
+      if (document.querySelector('#xin')) {
+        document.querySelector('#xin').remove();
+      }
+      var div = document.createElement('div')
+      window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+      div.id = 'xin';
+      div.style.position = 'absolute'
+      div.style.fontSize = '15px'
+      div.style.color = 'rgb(245,34,45)'
+      div.innerHTML = '❤';
+      div.style.left = e.pageX - 19 + 'px'
+      div.l = e.pageX - 19 + 'px'
+      div.style.top = e.pageY - 22 + 'px'
+      div.t = e.pageY - 22 + 'px'
+      div.style.opacity = 0;
+      document.body.append(div)
+      $(div).animate( {
+        opacity: 1,
+        fontSize: 45,
+      }, function () {
+        setTimeout(() => {
+         $(div).slideToggle(500,'linear')
+         $(div).slideToggle(500,'linear')
+        }, 600);
+
+
+     
+      })
+
+
+    })
+
+
+    }, 500);
+  </script>
+</body>
+
+</html>
