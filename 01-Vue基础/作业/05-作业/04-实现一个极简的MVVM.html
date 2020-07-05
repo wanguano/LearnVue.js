@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+  <input type="text" name="" value="" id='J_vueInput'>
+  <p id="J_span"></span>
+</body>
+<script type="text/javascript">
+ //#region 极简MVVM的实现
+  var obj = {};
+  Object.defineProperty(obj, 'say', {
+    set: function(val) {
+      document.querySelector('#J_vueInput').value = val
+      document.querySelector('#J_span').innerHTML = val
+    }
+  })
+  console.log(obj)
+  document.addEventListener('keyup', e => {
+    obj.say = e.target.value
+  })
+  //#endregion
+</script>
+
+<script>
+
+</script>
+
+</html>
