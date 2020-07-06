@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
   <meta charset="UTF-8">
@@ -24,20 +24,21 @@
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.date}}</td>
-          <td>{{item.price | getPrice}}</td>
+          <td>{{item.price | showPrice}}</td>
           <td>
-            <button @click="decrement(index)" :disabled="item.count <= 1">-</button>
+            <button @click="decrement(index)" :disabled="item.count > 1?false:isDisabled">-</button>
             {{item.count}}
             <button @click="increment(index)">+</button>
           </td>
-          <td><button @click="remove(index)">移除</button></td>
+          <td><button @click="del(index)">移除</button></td>
         </tr>
       </tbody>
     </table>
-    <h2>总价: {{totalPrice}}</h2>
+    <h2>总价: {{total}}</h2>
   </div>
 </body>
 <script src="../js/vue.js"></script>
-<script src="./main.js"></script>
+<!-- <script src="./main.js"></script> -->
+<script src="./index.js"></script>
 
 </html>
