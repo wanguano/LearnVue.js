@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<style>
+  [v-cloak] {
+display: none;
+}
+
+#app {
+width: 500px;
+margin: 0 auto;
+}
+
+table {
+width: 100%;
+border: 1px solid #444;
+border-collapse: collapse;
+}
+
+th, td {
+padding: 8px 16px;
+border: 1px solid #444;
+text-align: left;
+}
+
+th {
+background: #89abd3;
+color: rgb(214, 224, 235);
+font-weight: 600;
+white-space: nowrap;
+}
+</style>
+</head>
+<body>
+<div id="app" v-cloak>
+<template v-if="list.length">
+<table>
+<thead>
+<tr>
+<th>全选<input id="all" @click="selAll" type="checkbox" checked></th>
+<th>商品名称</th>
+<th>商品单价</th>
+<th>购买数量</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<template v-for="(item, index) in list">
+<tr>
+<td>
+<input type="checkbox" :checked="item.check" @click="item.check = !item.check">
+</td>
+<td>
+{{ item.name }}
+</td>
+<td>
+{{ item.price }}
+</td>
+<td>
+<button @click="reduce(index)" :disabled="item.count == 1">-</button>
+{{ item.count }}
+<button @click="add(index)">+</button>
+</td>
+<td>
+<button @click="remove(index)">移除</button>
+</td>
+</tr>
+</template>
+</tbody>
+</table>
+<div>总价: ￥ {{ totalPrices }}</div>
+</template>
+<template v-else>
+购物车没有商品
+</template>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+'use strict'
+
+var app = new Vue({
+el: '#app',
+data: {
+list: [
+{
+id: 1,
+name: 'iPhone 7',
+price: 6188,
+count: 1,
+check: true,
+},
+{
+id: 2,
+name: 'iPad Pro',
+price: 5888,
+count: 1,
+check: false,
+},
+{
+id: 3,
+name: 'MacBook Pro',
+price: 21488,
+count: 1,
+check: true,
+},
+] },
+methods: {
+remove: function (index) { //移除商品
+this.list.splice(index, 1);
+},
+reduce: function (index) { //减少商品
+this.list[index].count --;
+},
+add: function (index) { //增加商品
+this.list[index].count ++;
+},
+selAll: function () { //商品全选
+let isAll = document.querySelector('#all');
+
+if (isAll.checked == true) {
+this.list.forEach(function(item, index) {
+item.check = true;
+})
+} else {
+this.list.forEach(function(item, index) {
+item.check = false;
+})
+}
+}
+},
+computed: {
+totalPrices: function () { //计算总价
+let totalPrices = 0;
+
+this.list.forEach(function (val, index) {
+if (val.check == true)
+totalPrices += parseFloat(val.price * val.count);
+})
+
+return totalPrices.toString().replace(/\B(?=(\d{3})+$)/g, ','); //每三位数中间加一个‘，'
+}
+}
+})
+</script>
+</body>
+</html>

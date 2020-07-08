@@ -1,0 +1,28 @@
+#app {
+  width: 500px;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+  border: 1px solid #444;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px 16px;
+  border: 1px solid #444;
+  text-align: left;
+}
+
+th {
+  background: #89abd3;
+  color: rgb(214, 224, 235);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+[v-cloak] {
+  display: none;
+}
