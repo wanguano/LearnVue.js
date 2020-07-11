@@ -13,7 +13,7 @@
 
     <button @click="userClick">用户</button>
     <button @click="profileClick">档案</button>
-    <!-- 当我们想排除某些组件不被进行缓存时, 使用 exclue="" -->
+    <!-- 当我们想排除某些组件不被进行缓存时, 使用 exclude="" -->
     <keep-alive exclude="Profile,User">
       <router-view></router-view>
     </keep-alive>
