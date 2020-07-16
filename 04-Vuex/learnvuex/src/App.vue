@@ -1,5 +1,12 @@
 <template>
   <div id="app">
+    <h2>----------APP组件:Modules中内容---------</h2>
+    <h3>{{$store.state.a.name}}</h3>
+    <button @click="updateName">修改属性</button>
+    <h3>{{$store.getters.fullName}}</h3>
+    <h3>{{$store.getters.fullName2}}</h3>
+    <button @click="asyncUpdateName">异步更新名字</button>
+
     <h2>------APP内容: info对象是否是响应式的---------</h2>
     <h3>{{$store.state.info}}</h3>
     <button @click="updateStu">修改属性</button>
@@ -29,12 +36,13 @@
 <script>
 import HelloVuex from './components/HelloVuex'
 import Map from './components/Map'
+import { INCREMENT } from './store/Mutations-type'
 export default {
   name: 'App',
   methods: {
     add() {
       // commit提交更改公共state状态
-      this.$store.commit('increment')
+      this.$store.commit(INCREMENT)
     },
     sub() {
       this.$store.commit('decrement')
@@ -59,9 +67,29 @@ export default {
 
     //#region Mutation响应规则
     updateStu() {
-      this.$store.commit('updateStu')
-    }
+      // this.$store.commit('updateStu')
+      // this.$store.dispatch('updateStu', 'Action')
+
+      // 如何执行当前的这个异步操作成功的状态? 函数通知=>对象=>promise
+      // this.$store.dispatch('updateStu', () => {console.log('里面异步操作执行完毕')})
+      // this.$store.dispatch('updateStu', {
+      //   message: '我是附带的消息',
+      //   success: () => {console.log('里面异步执行成功')}
+      // })
+
+      // 使用promise来查看异步操作是否成功
+      this.$store.dispatch('updateStu')
+        .then(value => {
+          console.log(value)
+        })
+    },
     //#endregion
+    updateName() {
+      this.$store.commit('updateName', 'lisi')
+    },
+    asyncUpdateName() {
+      this.$store.dispatch('asyncUpdateName')
+    }
   },
   components: {
     HelloVuex,
