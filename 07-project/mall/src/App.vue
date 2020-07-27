@@ -1,20 +1,23 @@
 <template>
   <div id="app">
-     <main-tar-bar/>
-     <router-view></router-view>
+    <keep-alive exclude="Detail">
+      <router-view />
+    </keep-alive>
+    <!-- main-tab-bar 底部导航 -->
+    <main-tab-bar />
   </div>
 </template>
 
 <script>
-import MainTarBar from 'components/content/mainTabBar/mainTabBar'
+import MainTabBar from 'components/content/mainTabBar/mainTabBar'
 export default {
   name: 'App',
   components: {
-    MainTarBar
+    MainTabBar
   }
 }
 </script>
 
 <style>
-  @import 'assets/css/base.css';
+@import 'assets/css/base.css';
 </style>

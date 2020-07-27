@@ -1,6 +1,6 @@
 <template>
-  <div class="good-item">
-    <img :src="goodItem.show.img" alt="" @load="goodsImgLoad">
+  <div class="good-item" @click="itemClick">
+    <img :src="showImg" alt="" @load="goodsImgLoad">
     <div class="good-info">
       <p>{{goodItem.title}}</p>
       <span class="good-price">{{goodItem.price}}</span>
@@ -22,8 +22,23 @@ export default {
   },
   methods: {
     goodsImgLoad() {
-      // 1.发射事件 (时间总线)
+      // 1.发射事件 (时间总线) 引入不止有Home组件监听这个事件还有Detail组件需要监听
+      // 方案2: 都监听这个事件,然后在组建销毁或离开时解绑这个事件
       this.$bus.$emit('itemImgLoad')
+      // 方案1: 根据当前路由发射不同的事件
+      // if (this.$route.params.path.indexOf('/home')) {
+      //   this.$bus.$emit('HomeItemImgLoad')
+      // } else if (this.$route.params.path.indexOf('/detail')){
+      //   this.$bus.$emit('DetailItemImgLoad')
+      // }
+    },
+    itemClick() {
+      this.$router.push('/detail/' + this.goodItem.iid)
+    }
+  },
+  computed: {
+    showImg() {
+      return this.goodItem.image || this.goodItem.show.img 
     }
   },
 }

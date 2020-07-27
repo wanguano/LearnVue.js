@@ -4,17 +4,19 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
+    <!-- tabControl来决定是否固定显示的 -->
+    <tab-control :titles="['流行', '新款', '精选']" @clickItem="clickItem" ref="tabControlFixed" class="tab-control-fixed" v-show="isControlFixed" />
 
     <!-- scroll 惯性移动 probeType:3监听滚动 -->
-    <scroll class="content" ref="scroll" :probeType="3" @scrollInfo="scrollInfo" :pullUpLoad="true" @pullingUp="pullingUp">
+    <scroll class="content" ref="scroll" :probeType="2" @scrollInfo="scrollInfo" :pullUpLoad="true" @pullingUp="loadMore">
       <!-- 轮播图 -->
-      <home-swiper :banners="banners" />
+      <home-swiper :banners="banners" @tabImgLoad="tabImgLoad" />
       <!-- recommend -->
       <recommend-view :recommends="recommends" />
       <!-- FeatureView -->
       <feature-view />
       <!-- TabControl -->
-      <tab-control :titles="['流行', '新款', '精选']" class="tab-control" @clickItem="clickItem" />
+      <tab-control :titles="['流行', '新款', '精选']" @clickItem="clickItem" ref="tabControl" />
       <!-- GoodList -->
       <goods-list :goods="showGoods" />
     </scroll>
@@ -38,6 +40,11 @@ import Scroll from 'components/common/scroll/Scroll'
 import BackTop from 'components/content/backTop/backTop'
 // 网络请求组件
 import { getHomeMultidata, getHomeGoods } from 'network/home'
+// 工具JS文件
+import { debounce } from 'common/utils'
+import { NEW, SELL, POP } from 'common/const'
+import {itemImgMixin} from 'common/mixin'
+
 
 export default {
   name: "",
@@ -50,8 +57,11 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      goodsType: 'pop',
-      isShowTop: false
+      goodsType: POP,
+      isShowTop: false,
+      ControlOffsetTop: 0,
+      isControlFixed: false,
+      saveHistoryY: 0,
     }
   },
   components: {
@@ -69,23 +79,19 @@ export default {
     this.getHomeMultidata()
 
     // 2.商品列表数据
-    this.getHomeGoods('pop')
-    this.getHomeGoods('new')
-    this.getHomeGoods('sell')
+    this.getHomeGoods(POP)
+    this.getHomeGoods(NEW)
+    this.getHomeGoods(SELL)
+
+    // 3.详情推荐商品数据
   },
-  mounted() {
-    // 1.监听事件总线
-    this.$bus.$on('itemImgLoad', () => {
-      // 调用scroll的refresh刷新scroll的高低
-      this.$refs.scroll.refresh()
-    })
-  },
+  mixins: [itemImgMixin],
   methods: {
     // tabControl事件监听
     clickItem(index) {
       switch (index) {
         case 0:
-          this.goodsType = 'pop'
+          this.goodsType = POP
           break;
         case 1:
           this.goodsType = 'new'
@@ -94,6 +100,8 @@ export default {
           this.goodsType = 'sell'
           break;
       }
+      this.$refs.tabControl.currentIndex = index
+      this.$refs.tabControlFixed.currentIndex = index
     },
     // 返回顶部
     backTop() {
@@ -102,11 +110,21 @@ export default {
     },
     // 滚动信息
     scrollInfo(position) {
+      // 1.当滚动超过1000px时,显示上箭头
       this.isShowTop = Math.abs(position.y) > 1000
+
+      // 2.当滚动等于tabControl的offsetTop时,改变isControlFixed为true
+      this.isControlFixed = Math.abs(position.y) >= this.ControlOffsetTop
+
     },
     // 上拉底部时触发, 一般请求发送请求
-    pullingUp() {
+    loadMore() {
       this.getHomeGoods(this.goodsType)
+    },
+    // swiper-img加载完成触发: 获取tabControl的offsetTop
+    tabImgLoad() {
+      // 获取tabControl的offsetTop
+      this.ControlOffsetTop = this.$refs.tabControl.$el.offsetTop
     },
     /* 网络请求相关方法 */
     getHomeMultidata() {
@@ -132,6 +150,22 @@ export default {
       return this.goods[this.goodsType].list
     }
   },
+  activated() {
+    // 返回上一次纵坐标
+    this.$refs.scroll.backTop(0, this.saveHistoryY)
+    // 刷新scroll管理区域
+    this.$refs.scroll.refresh()
+  },
+  deactivated() {
+    // 1.离开时获取scroll的纵坐标
+    this.saveHistoryY = this.$refs.scroll.getPositionY()
+    // 2.解绑itemImgLoad事件  this.$bus.$off(eventName, func)
+    // func: 要解绑的事件处理函数
+    this.$bus.$off('itemImgLoad', this.itemImgListens)
+  },
+  destroyed() {
+    console.log('Home destroy')
+  },
 }
 </script>
 
@@ -143,19 +177,16 @@ export default {
   overflow-x: hidden;
 }
 .home-nav {
-  position: fixed;
+  /* 因为已经不使用原生滚动了 */
+  /* position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 9;
+  z-index: 9; */
   background-color: var(--color-tint);
   color: #fff;
 }
-.tab-control {
-  position: sticky;
-  top: 44px;
-  background: #fff;
-}
+
 .content {
   /* height: 85.7vh;*/
   /* height: calc(100% - 49px); */
@@ -166,5 +197,10 @@ export default {
   left: 0;
   right: 0;
   overflow: hidden;
+}
+.tab-control-fixed {
+  position: relative;
+  background: #fff;
+  z-index: 9;
 }
 </style>

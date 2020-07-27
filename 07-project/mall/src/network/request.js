@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // 封装axios
 /**
- * 传入URL和method,返回promise
+ * 传入URL和 method,返回promise
  * @param {object} config 网络配置
  */
 export function request(config) {
