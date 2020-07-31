@@ -14,6 +14,23 @@ export const itemImgMixin = {
       refresh()
     }
     this.$bus.$on('itemImgLoad', this.itemImgListens)
-    console.log('-----混入-----')
+    // console.log('-----混入-----')
+  },
+}
+import BackTop from 'components/content/backTop/backTop'
+import { BACK_POSITION } from 'common/const'
+export const backTopMixin = {
+  data() {
+    return {
+      isShowTop: false
+    }
+  },
+  components: {
+    BackTop
+  },
+  methods: {
+    listenerShow(position) {
+      this.isShowTop = Math.abs(position.y) > BACK_POSITION
+    }
   },
 }

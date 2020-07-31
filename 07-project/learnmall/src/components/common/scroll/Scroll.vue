@@ -46,16 +46,21 @@ export default {
   },
   methods: {
     // 返回顶部
-    backTop(x,y,time = 400) {
-      this.scroll.scrollTo(x,y,time)
+    backTop(x,y,time = 300) {
+      this.scroll && this.scroll.scrollTo(x,y,time)
     },
     // 下拉加载更多
     finishPullLoad(){
-      this.scroll.finishPullUp()
+      this.scroll && this.scroll.finishPullUp()
     },
     // 刷新scroll区域高度
     refresh() {
-      this.scroll.refresh()
+      this.scroll && this.scroll.refresh()
+    },
+  },
+  computed: {
+    scrollY() {
+      return this.scroll.y
     }
   },
 }

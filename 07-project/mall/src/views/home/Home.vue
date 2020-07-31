@@ -37,13 +37,12 @@ import NavBar from 'components/common/navbar/NavBar'
 import TabControl from 'components/content/tabControl/TabControl'
 import GoodsList from 'components/content/goods/GoodsList'
 import Scroll from 'components/common/scroll/Scroll'
-import BackTop from 'components/content/backTop/backTop'
 // 网络请求组件
 import { getHomeMultidata, getHomeGoods } from 'network/home'
 // 工具JS文件
 import { debounce } from 'common/utils'
-import { NEW, SELL, POP } from 'common/const'
-import {itemImgMixin} from 'common/mixin'
+import { NEW, SELL, POP, BACK_POSITION } from 'common/const'
+import {itemImgMixin, backTopMixin} from 'common/mixin'
 
 
 export default {
@@ -58,7 +57,6 @@ export default {
         sell: { page: 0, list: [] }
       },
       goodsType: POP,
-      isShowTop: false,
       ControlOffsetTop: 0,
       isControlFixed: false,
       saveHistoryY: 0,
@@ -72,7 +70,6 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
-    BackTop
   },
   created() {
     // 1.轮播图数据
@@ -85,7 +82,7 @@ export default {
 
     // 3.详情推荐商品数据
   },
-  mixins: [itemImgMixin],
+  mixins: [itemImgMixin, backTopMixin],
   methods: {
     // tabControl事件监听
     clickItem(index) {
@@ -111,7 +108,7 @@ export default {
     // 滚动信息
     scrollInfo(position) {
       // 1.当滚动超过1000px时,显示上箭头
-      this.isShowTop = Math.abs(position.y) > 1000
+      this.listenerShow(position)
 
       // 2.当滚动等于tabControl的offsetTop时,改变isControlFixed为true
       this.isControlFixed = Math.abs(position.y) >= this.ControlOffsetTop
@@ -152,7 +149,7 @@ export default {
   },
   activated() {
     // 返回上一次纵坐标
-    this.$refs.scroll.backTop(0, this.saveHistoryY)
+    this.$refs.scroll.backTop(0, this.saveHistoryY, 0)
     // 刷新scroll管理区域
     this.$refs.scroll.refresh()
   },

@@ -34,6 +34,7 @@ export default {
       probeType: this.probeType, // 监听滚动
       pullUpLoad: this.pullUpLoad // 滚动底部
     })
+    
     // 2.监听滚动
     if (this.probeType === 2 || this.probeType === 3) {
       this.scroll.on('scroll', position => {

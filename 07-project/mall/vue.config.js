@@ -15,6 +15,9 @@ module.exports = {
       .set('components', resolve('src/components'))
       .set('network', resolve('src/network'))
       .set('common', resolve('src/common'))
+  },
+  configureWebpack: {
+    devtool: 'source-map'
   }
 }
 

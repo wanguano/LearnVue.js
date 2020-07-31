@@ -32,6 +32,8 @@ export default {
   methods: {
     titleClick(index) {
       this.currentIndex = index
+      // 发射事件
+      this.$emit('titleClick', index)
     },
     backPage() {
       this.$router.back()
