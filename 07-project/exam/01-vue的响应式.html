@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+  Vue的响应式
+    1.app.message修改数据. Vue内部时如何监听message数据的改变
+    *  Object.defineProperty
+    2.当数据发生改变,Vue是如何知道要通知哪些人,界面发生刷新
+    *  发布订阅者模式
+-->
+  <div id="app">
+    {{message}}
+  </div>
+</body>
+<script src="../mall/node_modules/vue/dist/vue.js"></script>
+<script>
+  let obj = {
+    name: 'jack'
+  }
+
+  Object.keys(obj).forEach(key => {
+    let value = obj[key]
+
+    // 参数1: 对象    参数2: 添加的属性
+    Object.defineProperty(obj, key, {
+      // 当属性值发生改变时
+      set(newValue) {
+        console. log('监听' + key + '改变');
+        value = newValue
+      },
+      // 获取到属性值时
+      get() {
+        console.log('获取'+ key + '对应值')
+        return value
+      }
+    })
+  })
+
+  // 发布者订阅者 (用来存储谁引用了变量)
+  class Dep {
+    constructor() {
+      this.subscribe = []
+    }
+    addSub(watcher) {
+      this.subscribe.push(watcher)
+    }
+    notify() {
+      this.subscribe.forEach(item => {
+        item.update()
+      })
+    }
+  }
+
+  // 订阅者
+  class Watcher {
+    constructor(name) {
+      this.name = name
+    }
+
+    update() {
+      console.log(this.name + '发生update')
+    }
+  }
+
+
+
+  const dep = new Dep()
+
+  const s1 = new Watcher('张三')
+  dep.addSub(s1)
+  const s2 = new Watcher('李四')
+  dep.addSub(s2)
+  const s3 = new Watcher('王五')
+  dep.addSub(s3)
+
+  dep.notify()
+
+</script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        message: '哈哈哈哈哈',
+      }
+    },
+  })
+</script>
+
+</html>

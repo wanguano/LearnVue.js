@@ -14,7 +14,6 @@ export const itemImgMixin = {
       refresh()
     }
     this.$bus.$on('itemImgLoad', this.itemImgListens)
-    // console.log('-----混入-----')
   },
 }
 import BackTop from 'components/content/backTop/backTop'
