@@ -15,6 +15,9 @@ export default {
   components: {
     MainTabBar
   },
+  provide: {
+    foo: '我是APP组件通过provide传递的foo'
+  }
 }
 </script>
 

@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>过滤器 filter</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      {{message | lower}}
+    </div>
+    <script>
+      new Vue({
+        el: '#root',
+        filters: {
+          lower(value) {
+            return value.toLowerCase()
+          }
+        },
+        data() {
+          return {
+            message: 'Hello Vue'
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

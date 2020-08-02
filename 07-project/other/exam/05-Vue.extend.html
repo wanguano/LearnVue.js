@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Vue.extend 用法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <Test :msg="message"></Test>
+    </div>
+    <script>
+      const component = Vue.extend({
+        template: '<div>{{msg}}</div>',
+        props: {
+          msg: {
+            type: String,
+            default: 'default message'
+          }
+        },
+        name: 'Test'
+      })
+
+      Vue.component('Test')
+      new Vue({
+        el: '#root',
+        data() {
+          return {
+            message: "Test Extend Component"
+          }
+        }
+      })
+      
+    </script>
+  </body>
+</html>

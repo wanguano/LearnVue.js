@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Vue.component 用法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <Test :msg="message"></Test>
+    </div>
+    <script>
+      Vue.component('Test', {
+        template: '<div>{{msg}}</div>',
+        props: {
+          msg: {
+            type: String,
+            default: 'default message'
+          }
+        }
+      })
+      new Vue({
+        el: '#root',
+        data() {
+          return {
+            message: "Test Component"
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
