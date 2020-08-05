@@ -2,13 +2,15 @@
   <div class="category-content">
     <scroll class="scroll-lef">
       <!-- CategoryLeft -->
-      <category-left :category-left="categoryList" @itemClick="itemClick" />
+      <category-left :category-left="categoryList" />
     </scroll>
-    <scroll class="scroll-right" ref="scroll">
+    <!-- tab-control 作为固定使用 -->
+    <tab-control :titles="['综合','新品','销量']" class="fixed" v-show="isFixed" ref="fixed" @clickItem="controlClick" />
+    <scroll class="scroll-right" ref="scroll" :probeType="3" @scrollInfo="scrollInfo">
       <!-- CategoryRight -->
       <category-right :categoryIconList="categoryIcon" @imgLoad="imgLoad" />
       <!-- TabControl -->
-      <tab-control :titles="['综合','新品','销量']" />
+      <tab-control :titles="['综合','新品','销量']" ref="tabControl" @clickItem="controlClick" />
       <!-- GoodsList -->
       <goods-list :goods="goodList" />
     </scroll>
@@ -34,7 +36,8 @@ export default {
       categoryIcon: [],
       maitkey: 3627,
       miniWallkey: 10062603,
-      goodList: []
+      goodList: [],
+      isFixed: false
     }
   },
   components: {
@@ -68,6 +71,20 @@ export default {
       this.getCategoryIcon(this.maitkey)
       this.getCategoryGoods(this.miniWallkey)
       this.$refs.scroll.backTop(0, 0, 0)
+    },
+    // tab-control点击时同步数据
+    controlClick(index) {
+      this.$refs.fixed.currentIndex = index
+      this.$refs.tabControl.currentIndex = index
+    },
+    scrollInfo(position) {
+      // 1.获取当前滚动的纵坐标
+      let scrollY = Math.abs(position.y)
+      // 2.获取tab-control的offsetTop
+      let controlTop = this.$refs.tabControl.$el.offsetTop
+      // 3.大于等于时固定tabControl
+      this.isFixed = scrollY >= controlTop ? true : false
+      // 4.同步两个tanControl点击的分类
     },
     getCategoryIcon(maitkey) {
       getCategoryIcon(maitkey).then(res => {
@@ -117,5 +134,14 @@ export default {
 .scroll-right {
   width: 70%;
   /* background: purple; */
+}
+.fixed {
+  width: 70%;
+  position: fixed;
+  z-index: 9;
+  right: 0;
+  top: 43.4px;
+  left: 30%;
+  background: #fff;
 }
 </style>
