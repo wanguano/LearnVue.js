@@ -13,12 +13,12 @@
 
 <script>
 import CheckButton from 'components/content/checkButton/CheckButton'
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: "",
   data() {
     return {
-      isCheck: false
+      isCheck: false,
     }
   },
   components: {
@@ -38,11 +38,17 @@ export default {
   },
   methods: {
     isClick() {
-      let isSelect = !this.isCheck
-      this.$store.state.cartList.map(item => {
-        item.checked = isSelect 
-      })
-      this.isCheck = isSelect
+      // 有商品
+      if (this.cartList.length > 1) {
+        let isSelect = !this.isCheck
+        this.$store.state.cartList.map(item => {
+          item.checked = isSelect
+        })
+        this.isCheck = isSelect
+      } else {
+        // 没有商品
+        this.$toast.show('您还没有选择商品')
+      }
     },
     toast() {
       if (!this.isCheck) this.$toast.show('您还没有选择商品')
@@ -52,15 +58,15 @@ export default {
     // 1.监听事件总线
     this.$bus.$on('cartListClick', () => {
       let isAllSelect = false
-       this.$store.state.cartList.some(item => {
+      this.$store.state.cartList.some(item => {
         if (!item.checked) {
           isAllSelect = item.checked
           return true
-        }else {
+        } else {
           isAllSelect = item.checked
         }
       })
-       this.isCheck = isAllSelect
+      this.isCheck = isAllSelect
     })
   },
   // 2.当你全选完,点击商品列表又添加购物车时,还是显示全选

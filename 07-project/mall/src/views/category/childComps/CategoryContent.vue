@@ -2,7 +2,7 @@
   <div class="category-content">
     <scroll class="scroll-lef">
       <!-- CategoryLeft -->
-      <category-left :category-left="categoryList" />
+      <category-left :category-left="categoryList" @itemClick="itemClick" />
     </scroll>
     <!-- tab-control 作为固定使用 -->
     <tab-control :titles="['综合','新品','销量']" class="fixed" v-show="isFixed" ref="fixed" @clickItem="controlClick" />
@@ -66,11 +66,13 @@ export default {
     },
     // 左侧item点击时保存:maitkey和miniWallkey
     itemClick(maitkey, miniWallkey) {
+      console.log('----------')
       this.maitkey = maitkey
       this.miniWallkey = miniWallkey
       this.getCategoryIcon(this.maitkey)
       this.getCategoryGoods(this.miniWallkey)
       this.$refs.scroll.backTop(0, 0, 0)
+     
     },
     // tab-control点击时同步数据
     controlClick(index) {
