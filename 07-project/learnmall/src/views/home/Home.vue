@@ -182,6 +182,7 @@ export default {
 
 .tab-control {
   position: relative;
+  top: -1px;
   background: #fff;
   z-index: 9;
 }

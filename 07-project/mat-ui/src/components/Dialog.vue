@@ -60,6 +60,8 @@ export default {
 </script>
 
 <style lang="scss">
+// scoped会给当前所有组件中的所有元素都添加一个随机的属性
+// scoped会给当前组件中所有样式 页都添加一个对应的属性选择器
 .mt-dialog__wrapper {
   position: fixed;
   top: 0;
