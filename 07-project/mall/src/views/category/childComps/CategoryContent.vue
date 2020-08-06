@@ -66,7 +66,7 @@ export default {
     },
     // 左侧item点击时保存:maitkey和miniWallkey
     itemClick(maitkey, miniWallkey) {
-      console.log('----------')
+      // console.log('----------')
       this.maitkey = maitkey
       this.miniWallkey = miniWallkey
       this.getCategoryIcon(this.maitkey)

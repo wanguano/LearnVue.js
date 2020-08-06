@@ -2,7 +2,13 @@
   <div id="home">
     <!-- 头部 -->
     <nav-bar class="home-nav">
-      <div slot="center">购物街</div>
+      <template #left>
+        <img class="icon-left" src="~assets/img/common/left-btn.png" alt="">
+      </template>
+      <template #center>购物街</template>
+      <template #right>
+        <div class="login">登录</div>
+      </template>
     </nav-bar>
     <!-- tabControl来决定是否固定显示的 -->
     <tab-control :titles="['流行', '新款', '精选']" @clickItem="clickItem" ref="tabControlFixed" class="tab-control-fixed" v-show="isControlFixed" />
@@ -42,7 +48,7 @@ import { getHomeMultidata, getHomeGoods } from 'network/home'
 // 工具JS文件
 import { debounce } from 'common/utils'
 import { NEW, SELL, POP, BACK_POSITION } from 'common/const'
-import {itemImgMixin, backTopMixin} from 'common/mixin'
+import { itemImgMixin, backTopMixin } from 'common/mixin'
 
 
 export default {
@@ -197,7 +203,28 @@ export default {
 }
 .tab-control-fixed {
   position: relative;
+  top: -1px;
   background: #fff;
   z-index: 9;
+}
+.login {
+  position: relative;
+  font-family: 黑体;
+}
+.login::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  /* top: 1px; */
+  background:  url('~assets/img/common/user.png');
+  background-size: 100%;
+  width: 40px;
+  height: 40px;
+  clear: both;
+}
+.icon-left {
+  width: 18px;
+  height: 18px;
+  margin-top: 12px;
 }
 </style>
