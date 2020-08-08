@@ -216,7 +216,7 @@ export default {
   position: absolute;
   left: -20px;
   /* top: 1px; */
-  background:  url('~assets/img/common/user.png');
+  background: url('~assets/img/common/user.png');
   background-size: 100%;
   width: 40px;
   height: 40px;
