@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>{{message}}</h2>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          message: 'jane',
+        },
+      })
+      vm.message = 'new message'
+      // console.log(vm.$el.textContent)
+      // 使用nextTick来执行更新DOM后的操作
+      // 详细:为了数据变化之后等待vue完成更新DOM,可以在数据变化之后立即使用Vue.nextTick  在当前回调函数中能获取最新的DOM
+      Vue.nextTick(() => {
+        console.log(vm.$el.textContent)
+      })
+    </script>
+  </body>
+</html>

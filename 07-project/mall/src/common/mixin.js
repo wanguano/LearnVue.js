@@ -16,8 +16,10 @@ export const itemImgMixin = {
     this.$bus.$on('itemImgLoad', this.itemImgListens)
   },
 }
+
 import BackTop from 'components/content/backTop/backTop'
 import { BACK_POSITION } from 'common/const'
+
 export const backTopMixin = {
   data() {
     return {
