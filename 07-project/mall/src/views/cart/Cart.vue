@@ -19,7 +19,7 @@ import CartBottomBar from './childComps/CartBottomBar'
 
 import { mapGetters } from 'vuex'
 export default {
-  name: "",
+  name: "Cart",
   components: {
     NavBar,
     CartList,

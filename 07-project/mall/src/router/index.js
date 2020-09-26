@@ -43,7 +43,7 @@ const routes = [
 // 2.创建router对象
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'hash'
 })
 
 /* 重复点击组件,防止报错 */

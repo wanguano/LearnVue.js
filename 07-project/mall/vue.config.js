@@ -17,8 +17,8 @@ module.exports = {
       .set('common', resolve('src/common'))
   },
   configureWebpack: {
-    devtool: 'source-map'
-  }
+    // devtool: 'source-map'
+  },
 }
 
 

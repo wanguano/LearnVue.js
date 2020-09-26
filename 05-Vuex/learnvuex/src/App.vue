@@ -28,8 +28,9 @@
     <h2>----------Hello Vuex组件---------</h2>
     <hello-vuex></hello-vuex>
 
-    <h2>-------------Map---------------</h2>
+    <h2 class="text">-------------Map---------------</h2>
     <map-api></map-api>
+    
   </div>
 </template>
 
@@ -106,5 +107,8 @@ export default {
 <style>
 button {
   margin: 8px 15px 15px 0;
+}
+.btn {
+  color: red;
 }
 </style>
