@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "checkJs": false,
-    "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "module": "commonjs",
+    "experimentalDecorators": true, 
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["src/*"],
+      "components/*": ["src/components/*"],
+      "assets/*": ["src/assets/*"],
+      "views/*": ["src/views/*"],
+      "common/*": ["src/common/*"],
     }
   },
-  "exclude": ["node_modules", "dist", "temp"],
-  "include": ["src/**/*", "types/**/*"]
+  "exclude": ["node_modules", "dist"]
 }
+

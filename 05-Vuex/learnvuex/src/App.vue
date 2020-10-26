@@ -1,18 +1,18 @@
 <template>
   <div id="app">
     <h2>----------APP组件:Modules中内容---------</h2>
-    <h3>{{$store.state.a.name}}</h3>
+    <h3>{{ $store.state.a.name }}</h3>
     <button @click="updateName">修改属性</button>
-    <h3>{{$store.getters.fullName}}</h3>
-    <h3>{{$store.getters.fullName2}}</h3>
+    <h3>{{ $store.getters.fullName }}</h3>
+    <h3>{{ $store.getters.fullName2 }}</h3>
     <button @click="asyncUpdateName">异步更新名字</button>
 
     <h2>------APP内容: info对象是否是响应式的---------</h2>
-    <h3>{{$store.state.info}}</h3>
+    <h3>{{ $store.state.info }}</h3>
     <button @click="updateStu">修改属性</button>
 
     <h2>----------APP组件---------</h2>
-    <div>APP组件当前计数: {{$store.state.counter}}</div>
+    <div>APP组件当前计数: {{ $store.state.counter }}</div>
     <button @click="add">+</button>
     <button @click="sub">-</button>
     <button @click="addCount(5)">+5</button>
@@ -20,23 +20,19 @@
     <button @click="addStu">增加学生</button>
 
     <h2>------APP内容: getters相关信息---------</h2>
-    <h3>{{$store.getters.powerCounter}}</h3>
-    <h3>{{$store.getters.more20Stu}}</h3>
-    <h3>{{$store.getters.more20StuLength}}</h3>
-    <h3>{{$store.getters.moreAgeStu(8)}}</h3>
+    <h3>{{ $store.getters.powerCounter }}</h3>
+    <h3>{{ $store.getters.more20Stu }}</h3>
+    <h3>{{ $store.getters.more20StuLength }}</h3>
+    <h3>{{ $store.getters.moreAgeStu(8) }}</h3>
 
     <h2>----------Hello Vuex组件---------</h2>
     <hello-vuex></hello-vuex>
-
     <h2 class="text">-------------Map---------------</h2>
-    <map-api></map-api>
-    
   </div>
 </template>
 
 <script>
 import HelloVuex from './components/HelloVuex'
-import Map from './components/Map'
 import { INCREMENT } from './store/Mutations-type'
 export default {
   name: 'App',
@@ -57,7 +53,7 @@ export default {
       // 2.特殊的提交封装
       this.$store.commit({
         type: 'incrementCount',
-        count
+        count,
       })
     },
     addStu() {
@@ -79,10 +75,9 @@ export default {
       // })
 
       // 使用promise来查看异步操作是否成功
-      this.$store.dispatch('updateStu')
-        .then(value => {
-          console.log(value)
-        })
+      this.$store.dispatch('updateStu').then(value => {
+        console.log(value)
+      })
     },
     //#endregion
     updateName() {
@@ -90,16 +85,24 @@ export default {
     },
     asyncUpdateName() {
       this.$store.dispatch('asyncUpdateName')
-    }
+    },
+
+    getSongName(val) {
+      console.log(val)
+    },
   },
   components: {
     HelloVuex,
-    mapApi: Map
+  },
+  data() {
+    return {
+      singer: '南征北战',
+    }
   },
   computed: {
     filterStu() {
       return this.$store.state.students.filter(s => s.age > 20)
-    }
+    },
   },
 }
 </script>
