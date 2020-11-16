@@ -16,7 +16,6 @@ import NavBar from 'components/common/navbar/NavBar'
 import Scroll from 'components/common/scroll/Scroll'
 // 网络请求
 
-
 export default {
   name: "Category",
   data() {

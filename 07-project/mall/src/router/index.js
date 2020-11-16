@@ -12,6 +12,7 @@ const Profile = () => import('../views/profile/Profile')
 const Detail = () => import('../views/detail/Detail')
 
 
+
 // 配置路映射
 const routes = [
   {

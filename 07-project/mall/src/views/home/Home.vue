@@ -7,7 +7,7 @@
       </template>
       <template #center>购物街</template>
       <template #right>
-        <a href="/test.html" class="login">登录</a>
+        <div lass="login">登录</div>
       </template>
     </nav-bar>
     <!-- tabControl来决定是否固定显示的 -->
